@@ -13,7 +13,8 @@ export function Login() {
 
                 <div className="flex flex-col align-middle items-center">
                     <p className="py-3">Faça seu login com:</p>
-                    <button className="bg-zinc-100 rounded-md hover:border-2 hover:border-brand-500 focus:border-brand-500 focus:ring-brand-500 focus:ring-1 focus:outline-none transition-all">
+                    <button 
+                        className="bg-zinc-100 rounded-md hover:border-2 hover:border-brand-500 focus:border-brand-500 focus:ring-brand-500 focus:ring-1 focus:outline-none transition-all">
                         <GoogleLogo className="w-10 h-10 text-black" />
                     </button>
                 </div>
