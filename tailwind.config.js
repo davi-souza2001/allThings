@@ -11,6 +11,9 @@ module.exports = {
           500: '#8257E6'
         }
       },
+      fontFamily: {
+        'poppins': ['Poppins', 'sans-serif'] 
+      }
     },
   },
   plugins: [
