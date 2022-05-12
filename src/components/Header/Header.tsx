@@ -1,8 +1,8 @@
 export function Header(){
     return(
         <>
-            <div className="w-auto h-20 bg-black text-white">
-                <div>
+            <div>
+                <div className="text-red-800">
                     <h1>ALL THINGS</h1>
                 </div>
             </div>
