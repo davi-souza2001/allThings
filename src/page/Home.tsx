@@ -1,12 +1,13 @@
 import { Header } from "../components/Header/Header"
+import { TasksList } from "../components/TasksList/TasksList"
 
 export function Home() {
     return(
         <>
             <Header />
             
-            <div>
-                
+            <div className="flex justify-center items-center h-screen">
+                <TasksList />
             </div>
         </>
     )
