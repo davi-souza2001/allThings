@@ -9,17 +9,17 @@ export function Register(){
     return(
         <div className="flex justify-center items-center h-screen">
             <div className="flex flex-col align-middle items-center h-auto w-[350px] py-5 bg-[#2D2D2D] rounded-xl md:w-[500px]"> 
-                <div className="flex flex-row align-middle items-center text-xl mb-6">
-                    <UserCirclePlus className="w-6 h-6 mr-2" />
+                <div className="flex justify-center items-center text-3xl mb-6 w-full">
+                    <UserCirclePlus className="w-8 h-8 mr-2" />
                     <h1>Cadastro</h1>
                 </div>
 
-                <form action="" className="flex flex-col align-middle items-center">
+                <form className="flex flex-col align-middle items-center w-full">
                     {/* Criar limitação de 20 caracteres de nome */}
                     <input 
                         type="text" 
                         placeholder="Nome" 
-                        className="mb-3 min-w-[304px] md:w-[400px] text-sm placeholder-zinc-400 text-zinc-100 border-zinc-600 bg-[#5B5B5B] rounded-3xl focus:border-brand-500 focus:ring-brand-500 focus:ring-1 focus:outline-none"
+                        className="mb-3 min-w-[304px] md:w-[400px] text-sm outline-none transition-all placeholder-zinc-400 text-zinc-100 border-zinc-600 bg-[#5B5B5B] rounded-lg focus:border-brand-500 focus:ring-brand-500 focus:ring-1 focus:outline-none"
                         onChange={event => setName(event.target.value)}
                     />
 
@@ -27,7 +27,7 @@ export function Register(){
                     <input 
                         type="text" 
                         placeholder="Nickname" 
-                        className="mb-3 min-w-[304px] md:w-[400px] text-sm placeholder-zinc-400 text-zinc-100 border-zinc-600 bg-[#5B5B5B] rounded-3xl focus:border-brand-500 focus:ring-brand-500 focus:ring-1 focus:outline-none"
+                        className="mb-3 min-w-[304px] md:w-[400px] text-sm outline-none transition-all placeholder-zinc-400 text-zinc-100 border-zinc-600 bg-[#5B5B5B] rounded-lg focus:border-brand-500 focus:ring-brand-500 focus:ring-1 focus:outline-none"
                         onChange={event => setNickname(event.target.value)}
                     />
 
@@ -44,7 +44,7 @@ export function Register(){
                         className="flex flex-row items-center bg-[#181818] px-4 py-2 rounded-3xl hover:border-2 hover:border-brand-500 focus:border-brand-500 focus:ring-brand-500 focus:ring-1 focus:outline-none transition-all disabled:opacity-50 disabled:border-0"
                     >
                         Finalizar Cadastro 
-                        <CheckCircle className="ml-2"/>
+                        <CheckCircle className="w-5 h-5 ml-2 text-green-500"/>
                     </button>
                 </form>
             </div>
