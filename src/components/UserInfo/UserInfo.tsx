@@ -1,12 +1,12 @@
 import { NotePencil, UserCircle } from "phosphor-react";
 
-interface UserPageProps{
+interface UserInfoProps{
     name?: String,
     nickname?: String,
     description?: String
 }
 
-export function UserInfo(props: UserPageProps){
+export function UserInfo(props: UserInfoProps){
     return(
         <div>
             <div className="flex items-center justify-center bg-white text-black text-[150px] rounded-full w-32 h-32">
