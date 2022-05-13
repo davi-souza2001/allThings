@@ -1,4 +1,4 @@
-import { BookBookmark, UserCircle } from "phosphor-react";
+import { BookBookmark, DotsThreeVertical, UserCircle } from "phosphor-react";
 import { Link } from "react-router-dom";
 
 export function Header(){
@@ -11,15 +11,17 @@ export function Header(){
 
             {/* Precisa fazer o modo mobile */}
             {/* Utilizar <DotsThreeVertical /> */}
-            <div className="flex flex-row items-center text-lg px-6">
-                <Link to="/" className="px-6">
+            <div className="flex flex-rowitems-center text-lg px-6">
+                <Link to="/" className="px-6 hidden md:flex">
                     Início
                 </Link>
 
-                <div className="flex flex-row items-center cursor-pointer">
-                    <p>Nome do Usuário</p>
+                <Link to="/userPage" className="hidden items-center cursor-pointer md:flex md:flex-row">
+                    Nome do Usuário
                     <UserCircle className='w-6 h-6 ml-2' weight="bold" />
-                </div>
+                </Link>
+
+                <DotsThreeVertical weight="bold" className="flex w-6 h-6 md:hidden"/>
             </div>
         </div>
     )

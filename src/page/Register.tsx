@@ -15,6 +15,7 @@ export function Register(){
                 </div>
 
                 <form action="" className="flex flex-col align-middle items-center">
+                    {/* Criar limitação de 20 caracteres de nome */}
                     <input 
                         type="text" 
                         placeholder="Nome" 
@@ -22,6 +23,7 @@ export function Register(){
                         onChange={event => setName(event.target.value)}
                     />
 
+                    {/* Criar limitação de 20 caracteres de nickname */}
                     <input 
                         type="text" 
                         placeholder="Nickname" 
@@ -29,6 +31,7 @@ export function Register(){
                         onChange={event => setNickname(event.target.value)}
                     />
 
+                    {/* Criar limitação de 100 caracteres de descrição */}
                     <textarea 
                         placeholder="Uma breve descrição sobre você..." 
                         className="mb-3 min-w-[304px] md:w-[400px] min-h-[120px] text-sm placeholder-zinc-400 text-zinc-100 border-zinc-600 bg-[#5B5B5B] rounded-md focus:border-brand-500 focus:ring-brand-500 focus:ring-1 focus:outline-none resize-none"
