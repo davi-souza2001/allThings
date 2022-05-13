@@ -16,7 +16,7 @@ export function Header(){
                     Início
                 </Link>
 
-                <Link to="/userPage" className="hidden items-center cursor-pointer md:flex md:flex-row">
+                <Link to="/profile" className="hidden items-center cursor-pointer md:flex md:flex-row">
                     Nome do Usuário
                     <UserCircle className='w-6 h-6 ml-2' weight="bold" />
                 </Link>
