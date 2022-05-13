@@ -6,7 +6,7 @@ export function Home() {
         <>
             <Header />
             
-            <div className="flex justify-center items-center h-screen">
+            <div className="flex justify-center items-center">
                 <TasksList />
             </div>
         </>
