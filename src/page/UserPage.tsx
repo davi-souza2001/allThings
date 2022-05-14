@@ -1,6 +1,6 @@
-import { Header } from "../components/Header/Header";
-import { TasksList } from "../components/TasksList/TasksList";
-import { UserInfo } from "../components/UserInfo/UserInfo";
+import { Header } from "../components/Header";
+import { TasksList } from "../components/TasksList";
+import { UserInfo } from "../components/UserInfo";
 
 export function UserPage(){
     return(
