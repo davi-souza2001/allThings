@@ -10,8 +10,8 @@ export function Home() {
             <Widget />
             <div className="w-full h-[80vh] flex items-center justify-start flex-col">
                 <Tab.Group>
-                    <Tab.List className="bg-[#101010] w-[706px] h-[12%] flex items-center justify-center mt-7 rounded-md">
-                        <Tab className="w-full h-full rounded-md">Baixa</Tab>
+                    <Tab.List className="bg-[#101010] w-2/3 h-[10%] flex items-center justify-center mt-7 rounded-md">
+                        <Tab className="bg-red-700 w-full h-full rounded-md">Baixa</Tab>
                         <Tab className="w-full h-full rounded-md">Média</Tab>
                         <Tab className="w-full h-full rounded-md">Alta</Tab>
                     </Tab.List>
