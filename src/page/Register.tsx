@@ -8,7 +8,7 @@ export function Register(){
 
     return(
         <div className="flex justify-center items-center h-screen">
-            <div className="flex flex-col align-middle items-center h-auto w-[350px] py-5 bg-[#2D2D2D] rounded-xl md:w-[500px]"> 
+            <div className="flex flex-col align-middle items-center h-96 w-[350px] py-5 bg-[#2D2D2D] rounded-xl md:w-[500px]"> 
                 <div className="flex justify-center items-center text-3xl mb-6 w-full">
                     <UserCirclePlus className="w-8 h-8 mr-2" />
                     <h1>Cadastro</h1>
