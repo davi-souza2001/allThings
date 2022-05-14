@@ -1,4 +1,4 @@
-import { BookBookmark, DotsThreeVertical, UserCircle } from "phosphor-react";
+import { BookBookmark, DotsThreeVertical, UserCircle, IdentificationCard, House, Question, Power } from "phosphor-react";
 import { Link } from "react-router-dom";
 
 import {
@@ -10,7 +10,7 @@ import {
     MenuGroup,
     MenuOptionGroup,
     MenuDivider,
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
 
 export function Header() {
     return (
@@ -34,12 +34,31 @@ export function Header() {
                     <MenuButton className="md:hidden">
                         <DotsThreeVertical weight="bold" className="flex w-6 h-6 md:hidden" />
                     </MenuButton>
-                    <MenuList>
-                        <MenuItem>Download</MenuItem>
-                        <MenuItem>Create a Copy</MenuItem>
-                        <MenuItem>Mark as Draft</MenuItem>
-                        <MenuItem>Delete</MenuItem>
-                        <MenuItem>Attend a Workshop</MenuItem>
+                    <MenuList className='bg-[#101010] p-6 rounded-md'>
+                        <MenuItem>                
+                            <Link to="/" className="flex flex-row items-center justify-center">
+                                Início
+                                <House className='ml-2'/>
+                            </Link>
+                        </MenuItem>
+                        <MenuItem> 
+                            <Link to="/profile" className="flex flex-row items-center justify-center">
+                                Ver Perfil
+                                <IdentificationCard className='ml-2' />
+                            </Link>
+                        </MenuItem>
+                        <MenuItem>                            
+                            <Link to="/" className="flex flex-row items-center justify-center">
+                                Ajuda
+                                <Question className='ml-2' />
+                            </Link>
+                        </MenuItem>
+                        <MenuItem>                            
+                            <Link to="/" className="flex flex-row items-center justify-center text-[#B22222] mt-4">
+                                Sair
+                                <Power className='ml-2' />
+                            </Link>
+                        </MenuItem>
                     </MenuList>
                 </Menu>
             </div>
