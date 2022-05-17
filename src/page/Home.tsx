@@ -4,6 +4,10 @@ import { Header } from "../components/Header";
 import { SinglePage } from '../components/SinglePage';
 import { Widget } from "../components/Widget";
 
+// import { Link } from 'react-router-dom';
+
+{/* <Link to={'/asd'}>Criar página</Link> */ }
+
 
 export function Home() {
     return (

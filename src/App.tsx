@@ -1,18 +1,20 @@
-import { Routes, Route,  } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Home } from "./page/Home";
 import { Login } from "./page/Login";
+import { PageNotation } from "./page/PageNotation";
 import { Register } from "./page/Register";
 import { UserPage } from "./page/UserPage";
 
 export default function App() {
 
   return (
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={<UserPage />} />
-      </Routes>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/profile" element={<UserPage />} />
+      <Route path="/:idPage" element={<PageNotation />} />
+    </Routes>
   )
 }
 
