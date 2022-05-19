@@ -31,7 +31,6 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
           text-2xl lg:text-3xl xl:text-4xl
           font-semibold 
           mb-5
-          xl:mt-16
         `}>
           Página
         </div>
