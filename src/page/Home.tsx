@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { Tab } from '@headlessui/react';
 
 import { Header } from "../components/Header";
 import { SinglePage } from '../components/SinglePage';
 import { Widget } from "../components/Widget";
+import { ModalCreatePage } from '../components/Modal/ModalCreatePage';
+
 
 // import { Link } from 'react-router-dom';
 
@@ -10,10 +13,11 @@ import { Widget } from "../components/Widget";
 
 
 export function Home() {
+    const [openModal, setOpenModal] = useState(false);
+
     return (
         <div className="h-full w-full">
             <Header />
-            <Widget />
             <div className="w-full h-[80vh] flex items-center justify-start flex-col">
                 <Tab.Group>
                     <Tab.List className="bg-[#101010] w-2/3 h-[10%] flex items-center justify-center mt-7 rounded-md">
@@ -34,6 +38,11 @@ export function Home() {
                     </Tab.Panels>
                 </Tab.Group>
             </div>
+            <Widget onClick={() => setOpenModal(!openModal)}/>
+            <ModalCreatePage 
+            open={openModal}
+            close={() => setOpenModal(!openModal)}
+            />
         </div>
     )
 }
