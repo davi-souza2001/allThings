@@ -45,6 +45,9 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
             outline-none
             border-none
           bg-[#4f4f4f]
+            transition-all 
+          border-zinc-600 
+          focus:border-brand-500 focus:ring-brand-500 focus:ring-1 focus:outline-none
           `}
           />
         </div>
