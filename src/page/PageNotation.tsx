@@ -1,9 +1,14 @@
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom'
-import { NotePencil, CheckSquare } from 'phosphor-react'
+import { NotePencil } from 'phosphor-react'
 
 import { Header } from '../components/Header'
+import { Widget } from '../components/Widget'
+import { ModalCreatePage } from '../components/Modal/ModalCreatePage';
 
 export function PageNotation() {
+    const [openModal, setOpenModal] = useState(false);
+
     const { pathname } = useLocation()
     console.log(pathname)
 
@@ -35,6 +40,11 @@ export function PageNotation() {
                     </div>
                 </div>
             </div>
+            <Widget onClick={() => setOpenModal(!openModal)} />
+            <ModalCreatePage 
+            open={openModal}
+            close={() => setOpenModal(!openModal)}
+            />
         </>
     )
 }

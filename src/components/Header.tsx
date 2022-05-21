@@ -12,6 +12,8 @@ import {
     MenuDivider,
 } from '@chakra-ui/react';
 
+import LogoBlack from '../imgs/logo_AllThings.svg'
+
 export function Header() {
     return (
         <div className="flex flex-row bg-black text-zinc-100 w-auto h-14 items-center justify-between">
