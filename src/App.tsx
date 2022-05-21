@@ -5,16 +5,20 @@ import { PageNotation } from "./page/PageNotation";
 import { Register } from "./page/Register";
 import { UserPage } from "./page/UserPage";
 
+import { ModalProvider } from "./services/context/ModalContext"
+
 export default function App() {
 
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/profile" element={<UserPage />} />
-      <Route path="/:idPage" element={<PageNotation />} />
-    </Routes>
+    <ModalProvider>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<UserPage />} />
+        <Route path="/:idPage" element={<PageNotation />} />
+      </Routes>
+    </ModalProvider>
   )
 }
 

@@ -5,13 +5,15 @@ import { NotePencil } from 'phosphor-react'
 import { Header } from '../components/Header'
 import { Widget } from '../components/Widget'
 import { ModalCreatePage } from '../components/Modal/ModalCreatePage';
+import UseModal from '../services/hooks/useModal';
 
 export function PageNotation() {
     const [openModal, setOpenModal] = useState(false);
-
     const { pathname } = useLocation()
-    console.log(pathname)
 
+    const { modal } = UseModal()
+    console.log('modal')
+    console.log(modal)
     return (
         <>
             <Header />
@@ -41,9 +43,9 @@ export function PageNotation() {
                 </div>
             </div>
             <Widget onClick={() => setOpenModal(!openModal)} />
-            <ModalCreatePage 
-            open={openModal}
-            close={() => setOpenModal(!openModal)}
+            <ModalCreatePage
+                open={openModal}
+                close={() => setOpenModal(!openModal)}
             />
         </>
     )
