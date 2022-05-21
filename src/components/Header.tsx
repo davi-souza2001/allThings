@@ -15,9 +15,12 @@ import {
 export function Header() {
     return (
         <div className="flex flex-row bg-black text-zinc-100 w-auto h-14 items-center justify-between">
-            <Link to="/" className="flex items-center text-xl px-6 cursor-pointer">
-                <BookBookmark className="w-6 h-6 mr-2" />
-                ALL THINGS
+            <Link to="/" className="flex cursor-pointer md:hover:hidden transition-all">
+                <img src="../imgs/logo_AllThings.svg" alt="" />
+            </Link>
+
+            <Link to="/" className="hidden cursor-pointer md:hover:flex transition-all">
+                <img src="../imgs/logo_AllThingsPurple.svg" alt="" />
             </Link>
 
             <div className="flex flex-rowitems-center text-lg px-6">
