@@ -14,7 +14,7 @@ import UseAuth from '../services/hooks/useAuth';
 
 
 export function Home() {
-    const { user } = UseAuth()
+    const { user } = UseAuth();
     const [openModal, setOpenModal] = useState(false);
 
     return (

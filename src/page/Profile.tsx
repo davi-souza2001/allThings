@@ -3,8 +3,12 @@ import { SinglePage } from '../components/SinglePage';
 
 import { Header } from "../components/Header";
 import { UserInfo } from "../components/UserInfo";
+import UseAuth from '../services/hooks/useAuth';
 
-export function UserPage() {
+export function Profile() {
+
+    const { user } = UseAuth();
+
     return (
         <>
             <Header />
@@ -15,7 +19,7 @@ export function UserPage() {
                 </div>
 
                 <div className="mt-8 ml-8 mr-8">
-                    <UserInfo name={'Exemplo'} nickname={'exemplo'} description={'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis rerum commodi accusamus itaque.'} />
+                    <UserInfo name={user?.name} nickname={user?.email} description={user?.description} />
                 </div>
 
                 <div className="mt-8 ml-8">

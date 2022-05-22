@@ -3,7 +3,7 @@ import { Home } from "./page/Home";
 import { Login } from "./page/Login";
 import { PageNotation } from "./page/PageNotation";
 import { Register } from "./page/Register";
-import { UserPage } from "./page/UserPage";
+import { Profile } from "./page/Profile";
 
 import { ModalProvider } from "./services/context/ModalContext"
 import { AuthProvider } from "./services/context/AuthContext"
@@ -17,7 +17,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<UserPage />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/:idPage" element={<PageNotation />} />
         </Routes>
       </ModalProvider>
