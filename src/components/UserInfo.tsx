@@ -9,7 +9,7 @@ interface UserInfoProps {
 
 export function UserInfo(props: UserInfoProps) {
 
-    const { user } = UseAuth();
+    const { user, logout } = UseAuth();
 
     return (
         <div>
@@ -37,7 +37,7 @@ export function UserInfo(props: UserInfoProps) {
                 </div>
 
             </div>
-            <div className={`
+            <div onClick={logout} className={`
                   hidden
                 bg-red-500
                   mt-10 

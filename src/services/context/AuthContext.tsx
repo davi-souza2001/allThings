@@ -10,6 +10,7 @@ interface AuthContextProps {
     loginGoogle: () => Promise<void>
     createNewUser: (userComplete: User) => Promise<void>
     checkLoginUser: () => Promise<void>
+    logout: () => void
     user?: User;
     children?: React.ReactNode;
 }
@@ -26,6 +27,7 @@ const AuthContext = createContext<AuthContextProps>({
     loginGoogle: async () => { },
     createNewUser: async () => { },
     checkLoginUser: async () => { },
+    logout: () => { },
 });
 
 const providerGoogle = new GoogleAuthProvider();
@@ -40,7 +42,7 @@ export function AuthProvider(props: any) {
     const [user, setUser] = useState<User>({ email: '', name: '' });
     const token = Cookie.get('Admin-AllThings');
     const navigate = useNavigate()
-    
+
     async function loginGoogle() {
         await signInWithPopup(auth, providerGoogle).then((res) => {
             if (res.user.email && res.user.displayName) {
@@ -69,7 +71,7 @@ export function AuthProvider(props: any) {
         const dataForRequest = { email: token }
         try {
             const data = await Client.post('/user/login', dataForRequest).then((req) => {
-                if(req.data){
+                if (req.data) {
                     setUser(req.data)
                 }
             })
@@ -78,16 +80,21 @@ export function AuthProvider(props: any) {
         }
     }
 
+    async function logout() {
+        Cookie.remove('Admin-AllThings');
+        navigate('/login')
+    }
+
     useEffect(() => {
-        if(token){
+        if (token) {
             checkLoginUser()
-        } else{
+        } else {
             navigate('/login', { replace: true })
         }
     }, [token])
 
     return (
-        <AuthContext.Provider value={{ loginGoogle, user, createNewUser, checkLoginUser }}>
+        <AuthContext.Provider value={{ loginGoogle, user, createNewUser, checkLoginUser, logout }}>
             {props.children}
         </AuthContext.Provider>
     )
