@@ -5,6 +5,7 @@ import { Header } from "../components/Header";
 import { SinglePage } from '../components/SinglePage';
 import { Widget } from "../components/Widget";
 import { ModalCreatePage } from '../components/Modal/ModalCreatePage';
+import UseAuth from '../services/hooks/useAuth';
 
 
 // import { Link } from 'react-router-dom';
@@ -13,6 +14,7 @@ import { ModalCreatePage } from '../components/Modal/ModalCreatePage';
 
 
 export function Home() {
+    const { user } = UseAuth()
     const [openModal, setOpenModal] = useState(false);
 
     return (

@@ -1,5 +1,7 @@
-import { createContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { createContext, useEffect, useState } from "react";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import Cookie from 'js-cookie';
 
 import { auth } from "../../firebase/connect";
 import Client from '../../data/client';
@@ -7,6 +9,7 @@ import Client from '../../data/client';
 interface AuthContextProps {
     loginGoogle: () => Promise<void>
     createNewUser: (userComplete: User) => Promise<void>
+    checkLoginUser: () => Promise<void>
     user?: User;
     children?: React.ReactNode;
 }
@@ -19,16 +22,25 @@ interface User {
     description?: string,
 }
 
-const AuthContext = createContext<AuthContextProps>({ 
-    loginGoogle: async () => { }, 
-    createNewUser: async () => { } 
+const AuthContext = createContext<AuthContextProps>({
+    loginGoogle: async () => { },
+    createNewUser: async () => { },
+    checkLoginUser: async () => { },
 });
 
 const providerGoogle = new GoogleAuthProvider();
 
+function setCookieUser(user: any) {
+    Cookie.set('Admin-AllThings', user.email, {
+        expires: 7,
+    });
+}
+
 export function AuthProvider(props: AuthContextProps) {
     const [user, setUser] = useState<User>({ email: '', name: '' });
-
+    const token = Cookie.get('Admin-AllThings');
+    const navigate = useNavigate()
+    
     async function loginGoogle() {
         await signInWithPopup(auth, providerGoogle).then((res) => {
             if (res.user.email && res.user.displayName) {
@@ -38,6 +50,7 @@ export function AuthProvider(props: AuthContextProps) {
                     imageUser: res.user.photoURL ?? ''
                 }
                 setUser(initialUser);
+                setCookieUser(initialUser);
             }
         })
     }
@@ -52,8 +65,29 @@ export function AuthProvider(props: AuthContextProps) {
         }
     }
 
+    async function checkLoginUser() {
+        const dataForRequest = { email: token }
+        try {
+            const data = await Client.post('/user/login', dataForRequest).then((req) => {
+                if(req.data){
+                    setUser(req.data)
+                }
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        if(token){
+            checkLoginUser()
+        } else{
+            navigate('/login', { replace: true })
+        }
+    }, [token])
+
     return (
-        <AuthContext.Provider value={{ loginGoogle, user, createNewUser }}>
+        <AuthContext.Provider value={{ loginGoogle, user, createNewUser, checkLoginUser }}>
             {props.children}
         </AuthContext.Provider>
     )
