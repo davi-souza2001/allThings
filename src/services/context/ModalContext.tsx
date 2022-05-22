@@ -8,7 +8,7 @@ interface ModalContext {
 
 const ModalContext = createContext<ModalContext>({ modal: '' });
 
-export function ModalProvider(props: ModalContext) {
+export function ModalProvider(props: any) {
     const [modal, setModal] = useState<'CreatePage' | 'CreateNote'>('CreateNote');
 
     return (

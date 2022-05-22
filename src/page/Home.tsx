@@ -38,10 +38,10 @@ export function Home() {
                     </Tab.Panels>
                 </Tab.Group>
             </div>
-            <Widget onClick={() => setOpenModal(!openModal)}/>
-            <ModalCreatePage 
-            open={openModal}
-            close={() => setOpenModal(!openModal)}
+            <Widget onClick={() => setOpenModal(!openModal)} />
+            <ModalCreatePage
+                open={openModal}
+                close={() => setOpenModal(!openModal)}
             />
         </div>
     )

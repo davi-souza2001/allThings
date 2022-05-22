@@ -6,19 +6,22 @@ import { Register } from "./page/Register";
 import { UserPage } from "./page/UserPage";
 
 import { ModalProvider } from "./services/context/ModalContext"
+import { AuthProvider } from "./services/context/AuthContext"
 
 export default function App() {
 
   return (
-    <ModalProvider>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={<UserPage />} />
-        <Route path="/:idPage" element={<PageNotation />} />
-      </Routes>
-    </ModalProvider>
+    <AuthProvider>
+      <ModalProvider>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<UserPage />} />
+          <Route path="/:idPage" element={<PageNotation />} />
+        </Routes>
+      </ModalProvider>
+    </AuthProvider>
   )
 }
 
