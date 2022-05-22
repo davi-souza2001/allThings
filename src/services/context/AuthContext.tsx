@@ -80,7 +80,7 @@ export function AuthProvider(props: any) {
         }
     }
 
-    async function logout() {
+    function logout() {
         Cookie.remove('Admin-AllThings');
         navigate('/login')
     }
