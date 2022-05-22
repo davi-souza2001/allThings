@@ -9,7 +9,7 @@ interface ModalContext {
 const ModalContext = createContext<ModalContext>({ modal: '' });
 
 export function ModalProvider(props: any) {
-    const [modal, setModal] = useState<'CreatePage' | 'CreateNote'>('CreateNote');
+    const [modal, setModal] = useState<'CreatePage' | 'CreateNote'>('CreatePage');
 
     return (
         <ModalContext.Provider value={{ modal, setModal }}>

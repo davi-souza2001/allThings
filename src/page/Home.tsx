@@ -10,7 +10,7 @@ import UseAuth from '../services/hooks/useAuth';
 
 // import { Link } from 'react-router-dom';
 
-{/* <Link to={'/asd'}>Criar página</Link> */ }
+{/* <Link to={'/asd'}>Criar página</Link> */ } 
 
 
 export function Home() {
