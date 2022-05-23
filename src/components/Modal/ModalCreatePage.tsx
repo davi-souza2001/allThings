@@ -14,7 +14,7 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
   const { user } = UseAuth()
 
   const [namePage, setNamePage] = useState("");
-  const [levelPage, setLevelPage] = useState<"low" | "medium" | "high">("high");
+  const [levelPage, setLevelPage] = useState<"low" | "medium" | "high">("low");
 
   async function createPage() {
     if (user?.id) {

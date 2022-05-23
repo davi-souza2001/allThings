@@ -2,11 +2,17 @@ import { Wrench, Chat, NotePencil, Trash } from 'phosphor-react';
 
 import { Menu, MenuButton, MenuList } from '@chakra-ui/react';
 
-export function SinglePage() {
+interface SinglePageProps{
+    namePage: string,
+    onClick: () => void;
+}
+
+export function SinglePage(props: SinglePageProps) {
+
     return (
         <div className="w-full h-20 flex items-center justify-center">
             <div className="bg-white w-11/12 h-16 rounded-md text-black flex items-center justify-between mt-5" >
-                <span className="ml-4 text-xl font-medium cursor-pointer">Teste</span>
+                <span onClick={props.onClick} className="ml-4 text-xl font-medium cursor-pointer">{props.namePage}</span>
                 <Menu>
                     <MenuButton className="p-3 mr-4 text-xl bg-brand-500 rounded-md text-white hover:bg-brand-300 transition-colors">
                         <Wrench />

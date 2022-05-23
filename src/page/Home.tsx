@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Tab } from '@headlessui/react';
 
 import { Header } from "../components/Header";
@@ -6,16 +6,36 @@ import { SinglePage } from '../components/SinglePage';
 import { Widget } from "../components/Widget";
 import { ModalCreatePage } from '../components/Modal/ModalCreatePage';
 import UseAuth from '../services/hooks/useAuth';
+import Client from '../data/client';
+import { useNavigate } from 'react-router-dom';
 
-
-// import { Link } from 'react-router-dom';
-
-{/* <Link to={'/asd'}>Criar página</Link> */ } 
-
+interface Page {
+    id: string,
+    name: string,
+    levelType: string,
+    idUser: string
+}
 
 export function Home() {
+    const navigate = useNavigate();
     const { user } = UseAuth();
     const [openModal, setOpenModal] = useState(false);
+    const [pages, setPages] = useState<Page[]>([]);
+
+    async function getPagesForUser() {
+        if (user) {
+            const data = { idUser: user.id };
+            await Client.post('/page/get', data).then((res) => {
+                setPages(res.data)
+            })
+        }
+    }
+
+    console.log(pages)
+
+    useEffect(() => {
+        getPagesForUser()
+    }, [user])
 
     return (
         <div className="h-full w-full">
@@ -29,13 +49,31 @@ export function Home() {
                     </Tab.List>
                     <Tab.Panels className="bg-[#2D2D2D] rounded-md h-full w-[300px] mt-10 overflow-y-scroll scrollbar-thumb-zinc-700 scrollbar-track-transparent scrollbar-thin md:w-2/4 md:h-5/6">
                         <Tab.Panel>
-                            <SinglePage />
+                            {pages?.map((page: Page) => {
+                                if (page.levelType === 'low') {
+                                    return (
+                                        <SinglePage namePage={page.name} onClick={() => navigate(`/${page.id}`)} key={page.id} />
+                                    )
+                                }
+                            })}
                         </Tab.Panel>
                         <Tab.Panel>
-                            <SinglePage />
+                            {pages?.map((page: Page) => {
+                                if (page.levelType === 'medium') {
+                                    return (
+                                        <SinglePage namePage={page.name} onClick={() => navigate(`/${page.id}`)} key={page.id} />
+                                    )
+                                }
+                            })}
                         </Tab.Panel>
                         <Tab.Panel>
-                            <SinglePage />
+                            {pages?.map((page: Page) => {
+                                if (page.levelType === 'high') {
+                                    return (
+                                        <SinglePage namePage={page.name} onClick={() => navigate(`/${page.id}`)} key={page.id} />
+                                    )
+                                }
+                            })}
                         </Tab.Panel>
                     </Tab.Panels>
                 </Tab.Group>

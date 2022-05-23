@@ -41,7 +41,7 @@ function setCookieUser(user: any) {
 export function AuthProvider(props: any) {
     const [user, setUser] = useState<User>({ email: '', name: '' });
     const token = Cookie.get('Admin-AllThings');
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     async function loginGoogle() {
         await signInWithPopup(auth, providerGoogle).then((res) => {
