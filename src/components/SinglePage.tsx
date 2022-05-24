@@ -4,7 +4,7 @@ import { Menu, MenuButton, MenuList } from '@chakra-ui/react';
 
 interface SinglePageProps{
     namePage: string,
-    onClick: () => void;
+    open: () => void;
 }
 
 export function SinglePage(props: SinglePageProps) {
@@ -12,13 +12,13 @@ export function SinglePage(props: SinglePageProps) {
     return (
         <div className="w-full h-20 flex items-center justify-center">
             <div className="bg-white w-11/12 h-16 rounded-md text-black flex items-center justify-between mt-5" >
-                <span onClick={props.onClick} className="ml-4 text-xl font-medium cursor-pointer">{props.namePage}</span>
+                <span onClick={props.open} className="ml-4 text-xl font-medium cursor-pointer">{props.namePage}</span>
                 <Menu>
                     <MenuButton className="p-3 mr-4 text-xl bg-brand-500 rounded-md text-white hover:bg-brand-300 transition-colors">
                         <Wrench />
                     </MenuButton>
                     <MenuList className='mt-2 w-28 h-36 flex items-center justify-around flex-col'>
-                        <div className='bg-[#3CB371] rounded-t-lg h-full w-full px-5 flex items-center justify-center text-white font-medium cursor-pointer'>
+                        <div onClick={props.open} className='bg-[#3CB371] rounded-t-lg h-full w-full px-5 flex items-center justify-center text-white font-medium cursor-pointer'>
                             Abrir
                             <Chat className='ml-2'/>
                         </div>

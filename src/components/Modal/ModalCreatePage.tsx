@@ -3,6 +3,8 @@ import { XCircle } from "phosphor-react";
 
 import UseModal from "../../services/hooks/useModal";
 import UseAuth from '../../services/hooks/useAuth';
+import Client from '../../data/client';
+
 
 interface ModalCreatePageProps {
   open: boolean;
@@ -24,8 +26,10 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
         idUser: user?.id
       }
 
-      console.log(pageData)
-      props.close()
+      await Client.post('/page/create', pageData).then((res) => {
+        setNamePage("")
+        props.close()
+      })
     }
 
   }
@@ -147,9 +151,9 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
           w-full h-14 lg:h-2/5 lg:items-end
           flex items-center justify-center
         `}>
-              <button 
-              onClick={createPage}
-              className={`
+              <button
+                onClick={createPage}
+                className={`
                 w-40 h-10 xl:h-14 xl:w-52
               bg-brand-500
                 rounded-lg

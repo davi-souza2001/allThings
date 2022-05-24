@@ -8,6 +8,7 @@ import { ModalCreatePage } from '../components/Modal/ModalCreatePage';
 import UseAuth from '../services/hooks/useAuth';
 import Client from '../data/client';
 import { useNavigate } from 'react-router-dom';
+import UseModal from '../services/hooks/useModal';
 
 interface Page {
     id: string,
@@ -18,7 +19,10 @@ interface Page {
 
 export function Home() {
     const navigate = useNavigate();
+
     const { user } = UseAuth();
+    const { modal } = UseModal();
+
     const [openModal, setOpenModal] = useState(false);
     const [pages, setPages] = useState<Page[]>([]);
 
@@ -31,10 +35,9 @@ export function Home() {
         }
     }
 
-    console.log(pages)
-
     useEffect(() => {
         getPagesForUser()
+
     }, [user])
 
     return (
@@ -52,7 +55,7 @@ export function Home() {
                             {pages?.map((page: Page) => {
                                 if (page.levelType === 'low') {
                                     return (
-                                        <SinglePage namePage={page.name} onClick={() => navigate(`/${page.id}`)} key={page.id} />
+                                        <SinglePage namePage={page.name} open={() => navigate(`/${page.id}`)} key={page.id} />
                                     )
                                 }
                             })}
@@ -61,7 +64,7 @@ export function Home() {
                             {pages?.map((page: Page) => {
                                 if (page.levelType === 'medium') {
                                     return (
-                                        <SinglePage namePage={page.name} onClick={() => navigate(`/${page.id}`)} key={page.id} />
+                                        <SinglePage namePage={page.name} open={() => navigate(`/${page.id}`)} key={page.id} />
                                     )
                                 }
                             })}
@@ -70,7 +73,7 @@ export function Home() {
                             {pages?.map((page: Page) => {
                                 if (page.levelType === 'high') {
                                     return (
-                                        <SinglePage namePage={page.name} onClick={() => navigate(`/${page.id}`)} key={page.id} />
+                                        <SinglePage namePage={page.name} open={() => navigate(`/${page.id}`)} key={page.id} />
                                     )
                                 }
                             })}
