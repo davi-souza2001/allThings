@@ -27,7 +27,19 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
   const [titleNote, setTitleNote] = useState("");
   const [typeNote, setTypeNote] = useState<"note" | "image">("note");
 
-  function notify(msg: string) {
+  function notifySucess(msg: string) {
+    toast.dark(msg, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    })
+  }
+
+  function notifyError(msg: string) {
     toast.error(msg, {
       position: "top-right",
       autoClose: 5000,
@@ -41,7 +53,7 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
 
   async function createPage() {
     if (namePage === '') {
-      notify('Preencha o nome da página!')
+      notifyError('Preencha o nome da página!')
       return
     }
 
@@ -58,18 +70,19 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
         props.close()
         setChangeData(!changeData);
         setLoading(false);
+        notifySucess('Página criada com sucesso!')
       })
     }
   }
 
   async function createNote() {
     if (titleNote === '') {
-      notify('Preencha o título da nota!')
+      notifyError('Preencha o título da nota!')
       return
     }
 
     if (content === '') {
-      notify('Preencha o conteúdo da nota!')
+      notifyError('Preencha o conteúdo da nota!')
       return
     }
 
@@ -88,6 +101,7 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
         props.close()
         setChangeData(!changeData);
         setLoading(false);
+        notifySucess('Nota criada com sucesso!')
       })
     }
   }

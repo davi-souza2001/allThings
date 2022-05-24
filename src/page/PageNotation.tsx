@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom'
-import { NotePencil } from 'phosphor-react'
+import { Chat, NotePencil, Trash, Wrench } from 'phosphor-react'
+import { toast, ToastContainer } from 'react-toastify';
+import { Menu, MenuButton, MenuList } from '@chakra-ui/react';
 
 import { Header } from '../components/Header'
 import { Widget } from '../components/Widget'
@@ -9,6 +11,7 @@ import { ModalCreatePage } from '../components/Modal/ModalCreatePage';
 import UseModal from '../services/hooks/useModal';
 import UseAuth from '../services/hooks/useAuth';
 import Client from '../data/client';
+
 
 interface PageNotationProps {
     id: string,
@@ -54,6 +57,18 @@ export function PageNotation() {
         }
     }
 
+    function notifyError(msg: string) {
+        toast.error(msg, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        })
+    }
+
     useEffect(() => {
         setModal('CreateNote')
         if (user?.id) {
@@ -65,6 +80,8 @@ export function PageNotation() {
     return (
         <>
             <Header />
+            <ToastContainer />
+
             <div className="w-3/4 h-20 flex items-center ml-10">
                 <span className="font-semibold text-4xl flex">
                     {pages?.map((page: Page) => {
@@ -80,7 +97,20 @@ export function PageNotation() {
                     {notes?.map((note: PageNotationProps) => {
                         return (
                             <div key={note.id} className="mt-5 p-5 rounded-lg bg-neutral-800 mb-4">
-                                <p className="text-2xl font-medium mb-4">{note.title}</p>
+                                <div className="w-full flex items-center justify-between">
+                                    <p className="text-2xl font-medium mb-4">{note.title}</p>
+                                    <Menu>
+                                        <MenuButton className="p-3 mr-4 text-xl bg-brand-500 rounded-md text-white hover:bg-brand-300 transition-colors">
+                                            <Wrench />
+                                        </MenuButton>
+                                        <MenuList className='mt-2 w-28 h-10 flex items-center justify-around flex-col'>
+                                            <div className='bg-[#B22222] rounded-lg h-full w-full px-4 flex items-center justify-center text-white font-medium cursor-pointer'>
+                                                Deletar
+                                                <Trash className='ml-1' />
+                                            </div>
+                                        </MenuList>
+                                    </Menu>
+                                </div>
                                 <p>{note.content}</p>
                             </div>
                         )
