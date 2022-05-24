@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom'
-import { Chat, NotePencil, Trash, Wrench } from 'phosphor-react'
-import { toast, ToastContainer } from 'react-toastify';
+import { NotePencil, Trash, Wrench } from 'phosphor-react'
 import { Menu, MenuButton, MenuList } from '@chakra-ui/react';
 
 import { Header } from '../components/Header'
@@ -11,7 +10,6 @@ import { ModalCreatePage } from '../components/Modal/ModalCreatePage';
 import UseModal from '../services/hooks/useModal';
 import UseAuth from '../services/hooks/useAuth';
 import Client from '../data/client';
-
 
 interface PageNotationProps {
     id: string,
@@ -31,16 +29,15 @@ interface Page {
 export function PageNotation() {
     const { pathname } = useLocation();
     const { user } = UseAuth();
-    const { setModal, changeData } = UseModal();
+    const { setModal, changeData, setChangeData } = UseModal();
     const idWithOutSlash = pathname.split('/')[1];
 
     const [openModal, setOpenModal] = useState(false);
     const [notes, setNotes] = useState<PageNotationProps[]>([]);
     const [pages, setPages] = useState<Page[]>([]);
 
-    async function getNotesForUser() {
+    async function getNotes() {
         if (user) {
-
             const data = { idPage: idWithOutSlash };
             await Client.post('/note/get', data).then((res) => {
                 setNotes(res.data)
@@ -57,22 +54,19 @@ export function PageNotation() {
         }
     }
 
-    function notifyError(msg: string) {
-        toast.error(msg, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-        })
+    async function deleNote(idNote: string){
+        if(user){
+            const data = {id: idNote}
+            await Client.post('/note/delete', data).then((res) => {
+                setChangeData(!changeData)
+            })
+        }
     }
 
     useEffect(() => {
         setModal('CreateNote')
         if (user?.id) {
-            getNotesForUser()
+            getNotes()
             getPages()
         }
     }, [user, changeData])
@@ -80,8 +74,6 @@ export function PageNotation() {
     return (
         <>
             <Header />
-            <ToastContainer />
-
             <div className="w-3/4 h-20 flex items-center ml-10">
                 <span className="font-semibold text-4xl flex">
                     {pages?.map((page: Page) => {
@@ -104,7 +96,7 @@ export function PageNotation() {
                                             <Wrench />
                                         </MenuButton>
                                         <MenuList className='mt-2 w-28 h-10 flex items-center justify-around flex-col'>
-                                            <div className='bg-[#B22222] rounded-lg h-full w-full px-4 flex items-center justify-center text-white font-medium cursor-pointer'>
+                                            <div onClick={() => deleNote(note.id)} className='bg-[#B22222] rounded-lg h-full w-full px-4 flex items-center justify-center text-white font-medium cursor-pointer'>
                                                 Deletar
                                                 <Trash className='ml-1' />
                                             </div>
