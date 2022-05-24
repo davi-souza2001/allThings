@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { createContext, useEffect, useState } from "react";
+import { createContext, Dispatch, SetStateAction, useEffect, useState } from "react";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import Cookie from 'js-cookie';
 
@@ -11,8 +11,10 @@ interface AuthContextProps {
     createNewUser: (userComplete: User) => Promise<void>
     checkLoginUser: () => Promise<void>
     logout: () => void
-    user?: User;
-    children?: React.ReactNode;
+    user?: User
+    loadingUser?: boolean
+    setLoadingUser: Dispatch<SetStateAction<boolean>>
+    children?: React.ReactNode
 }
 
 interface User {
@@ -28,6 +30,7 @@ const AuthContext = createContext<AuthContextProps>({
     createNewUser: async () => { },
     checkLoginUser: async () => { },
     logout: () => { },
+    setLoadingUser: () => { },
 });
 
 const providerGoogle = new GoogleAuthProvider();
@@ -39,11 +42,13 @@ function setCookieUser(user: any) {
 }
 
 export function AuthProvider(props: any) {
+    const [loadingUser, setLoadingUser] = useState(false);
     const [user, setUser] = useState<User>({ email: '', name: '' });
     const token = Cookie.get('Admin-AllThings');
     const navigate = useNavigate();
 
     async function loginGoogle() {
+        setLoadingUser(true);
         await signInWithPopup(auth, providerGoogle).then((res) => {
             if (res.user.email && res.user.displayName) {
                 const initialUser: User = {
@@ -55,9 +60,11 @@ export function AuthProvider(props: any) {
                 setCookieUser(initialUser);
             }
         })
+        setLoadingUser(false);
     }
 
     async function createNewUser(userComplete: User) {
+        setLoadingUser(true);
         try {
             const data = await Client.post('/user/create', userComplete).then((req) => {
                 setUser(userComplete);
@@ -65,9 +72,11 @@ export function AuthProvider(props: any) {
         } catch (error) {
             console.log(error)
         }
+        setLoadingUser(false);
     }
 
     async function checkLoginUser() {
+        setLoadingUser(true);
         const dataForRequest = { email: token }
         try {
             const data = await Client.post('/user/login', dataForRequest).then((req) => {
@@ -78,6 +87,7 @@ export function AuthProvider(props: any) {
         } catch (error) {
             console.log(error)
         }
+        setLoadingUser(false);
     }
 
     function logout() {
@@ -86,15 +96,17 @@ export function AuthProvider(props: any) {
     }
 
     useEffect(() => {
+        setLoadingUser(true);
         if (token) {
             checkLoginUser()
         } else {
             navigate('/login', { replace: true })
         }
+        setLoadingUser(false);
     }, [token])
 
     return (
-        <AuthContext.Provider value={{ loginGoogle, user, createNewUser, checkLoginUser, logout }}>
+        <AuthContext.Provider value={{ loginGoogle, user, createNewUser, checkLoginUser, logout, loadingUser, setLoadingUser }}>
             {props.children}
         </AuthContext.Provider>
     )

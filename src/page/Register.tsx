@@ -30,10 +30,9 @@ export function Register() {
             setName(user.name)
         }
 
-        if(user?.id){
+        if (user?.id) {
             navigate('/', { replace: true })
         }
-
     }, [user])
 
     return (
