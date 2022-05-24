@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { XCircle } from "phosphor-react";
+import { CircularProgress, CircularProgressLabel } from '@chakra-ui/react'
 
 import UseModal from "../../services/hooks/useModal";
 import UseAuth from '../../services/hooks/useAuth';
@@ -9,12 +10,14 @@ import Client from '../../data/client';
 interface ModalCreatePageProps {
   open: boolean;
   close: () => void;
-  idPage: string;
+  idPage?: string;
 }
 
 export function ModalCreatePage(props: ModalCreatePageProps) {
   const { modal } = UseModal();
-  const { user } = UseAuth()
+  const { user } = UseAuth();
+
+  const [loading, setLoading] = useState(false);
 
   const [namePage, setNamePage] = useState("");
   const [levelPage, setLevelPage] = useState<"low" | "medium" | "high">("low");
@@ -24,6 +27,7 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
   const [typeNote, setTypeNote] = useState<"note" | "image">("note");
 
   async function createPage() {
+    setLoading(true);
     if (user?.id) {
       const pageData = {
         name: namePage,
@@ -34,12 +38,13 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
       await Client.post('/page/create', pageData).then((res) => {
         setNamePage("")
         props.close()
+        setLoading(false);
       })
     }
-
   }
 
   async function createNote() {
+    setLoading(true);
     if (props.idPage) {
       const data = {
         idPage: props.idPage,
@@ -52,6 +57,7 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
         setContent("")
         setTitleNote("")
         props.close()
+        setLoading(false);
       })
     }
   }
@@ -176,7 +182,7 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
               <button
                 onClick={createPage}
                 className={`
-                w-40 h-10 xl:h-14 xl:w-52
+                w-40 h-14 xl:h-14 xl:w-52
               bg-brand-500
                 rounded-lg
                 text-xl font-semibold
@@ -185,7 +191,11 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
               hover:bg-brand-300
                 transition-all
           `}>
-                Criar
+                {loading ? (
+                  <CircularProgress isIndeterminate color='rgb(130 87 230)' />
+                )
+                  :
+                  'Criar'}
               </button>
             </div>
           </div>
@@ -291,7 +301,11 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
               hover:bg-brand-300
                 transition-all
           `}>
-                Criar
+                {loading ? (
+                  <CircularProgress isIndeterminate color='rgb(130 87 230)' />
+                )
+                  :
+                  'Criar'}
               </button>
             </div>
           </div>

@@ -28,9 +28,7 @@ export function Profile() {
                         <Tab.Group>
                             <Tab.Panels className="bg-[#2D2D2D] rounded-md h-full mt-10 overflow-y-scroll scrollbar-thumb-zinc-700 scrollbar-track-transparent scrollbar-thin md:w-2/4 md:h-5/6 w-[350px]">
                                 <Tab.Panel>
-                                    <SinglePage />
-                                    <SinglePage />
-                                    <SinglePage />
+                                    <SinglePage namePage='algo'open={() => console.log('asd')} />
                                 </Tab.Panel>
                             </Tab.Panels>
                         </Tab.Group>
