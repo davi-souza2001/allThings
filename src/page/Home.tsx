@@ -10,6 +10,7 @@ import { ModalCreatePage } from '../components/Modal/ModalCreatePage';
 import UseAuth from '../services/hooks/useAuth';
 import Client from '../data/client';
 import UseModal from '../services/hooks/useModal';
+import { toast, ToastContainer } from 'react-toastify';
 
 interface Page {
     id: string,
@@ -19,10 +20,22 @@ interface Page {
 }
 
 export function Home() {
+    function notify(msg: string) {
+        toast.error(msg, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        })
+    }
+
     const navigate = useNavigate();
 
     const { user } = UseAuth();
-    const { setModal, changeData } = UseModal();
+    const { setModal, changeData, setChangeData } = UseModal();
 
     const [openModal, setOpenModal] = useState(false);
     const [pages, setPages] = useState<Page[]>([]);
@@ -33,6 +46,15 @@ export function Home() {
             await Client.post('/page/get', data).then((res) => {
                 setPages(res.data)
             })
+        }
+    }
+
+    async function deletePage(pageId: string) {
+        if (user) {
+            const data = { id: pageId };
+            await Client.post('/page/delete', data).then((res) => {
+                setChangeData(!changeData)
+            }).catch((error) => notify('Você tem notas não terminadas nessa página!'))
         }
     }
 
@@ -48,6 +70,7 @@ export function Home() {
     return (
         <div className="h-full w-full">
             <Header />
+            <ToastContainer />
             <div className="w-full h-[80vh] flex items-center justify-start flex-col">
                 <Tab.Group>
                     <Tab.List className="bg-[#101010] w-2/3 h-[10%] flex items-center justify-center mt-7 rounded-md">
@@ -60,7 +83,11 @@ export function Home() {
                             {pages?.map((page: Page) => {
                                 if (page.levelType === 'low') {
                                     return (
-                                        <SinglePage namePage={page.name} open={() => navigate(`/${page.id}`)} key={page.id} />
+                                        <SinglePage
+                                            namePage={page.name}
+                                            open={() => navigate(`/${page.id}`)}
+                                            delete={() => deletePage(page.id)}
+                                            key={page.id} />
                                     )
                                 }
                             })}
@@ -69,7 +96,11 @@ export function Home() {
                             {pages?.map((page: Page) => {
                                 if (page.levelType === 'medium') {
                                     return (
-                                        <SinglePage namePage={page.name} open={() => navigate(`/${page.id}`)} key={page.id} />
+                                        <SinglePage
+                                            namePage={page.name}
+                                            open={() => navigate(`/${page.id}`)}
+                                            delete={() => deletePage(page.id)}
+                                            key={page.id} />
                                     )
                                 }
                             })}
@@ -78,7 +109,11 @@ export function Home() {
                             {pages?.map((page: Page) => {
                                 if (page.levelType === 'high') {
                                     return (
-                                        <SinglePage namePage={page.name} open={() => navigate(`/${page.id}`)} key={page.id} />
+                                        <SinglePage
+                                            namePage={page.name}
+                                            open={() => navigate(`/${page.id}`)}
+                                            delete={() => deletePage(page.id)}
+                                            key={page.id} />
                                     )
                                 }
                             })}

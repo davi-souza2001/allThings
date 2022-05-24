@@ -5,6 +5,7 @@ import { Menu, MenuButton, MenuList } from '@chakra-ui/react';
 interface SinglePageProps{
     namePage: string,
     open: () => void;
+    delete: () => void;
 }
 
 export function SinglePage(props: SinglePageProps) {
@@ -26,7 +27,7 @@ export function SinglePage(props: SinglePageProps) {
                             Editar
                             <NotePencil className='ml-2'/>
                         </div>
-                        <div className='bg-[#B22222] rounded-b-lg h-full w-full px-4 flex items-center justify-center text-white font-medium cursor-pointer'>
+                        <div onClick={props.delete} className='bg-[#B22222] rounded-b-lg h-full w-full px-4 flex items-center justify-center text-white font-medium cursor-pointer'>
                             Deletar
                             <Trash className='ml-1'/>
                         </div>

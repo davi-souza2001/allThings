@@ -5,6 +5,7 @@ import { CircularProgress, CircularProgressLabel } from '@chakra-ui/react'
 import UseModal from "../../services/hooks/useModal";
 import UseAuth from '../../services/hooks/useAuth';
 import Client from '../../data/client';
+import { toast, ToastContainer } from "react-toastify";
 
 
 interface ModalCreatePageProps {
@@ -26,9 +27,26 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
   const [titleNote, setTitleNote] = useState("");
   const [typeNote, setTypeNote] = useState<"note" | "image">("note");
 
+  function notify(msg: string) {
+    toast.error(msg, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
+  }
+
   async function createPage() {
-    setLoading(true);
+    if (namePage === '') {
+      notify('Preencha o nome da página!')
+      return
+    }
+
     if (user?.id) {
+      setLoading(true);
       const pageData = {
         name: namePage,
         levelType: levelPage,
@@ -45,8 +63,18 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
   }
 
   async function createNote() {
-    setLoading(true);
+    if (titleNote === '') {
+      notify('Preencha o título da nota!')
+      return
+    }
+
+    if (content === '') {
+      notify('Preencha o conteúdo da nota!')
+      return
+    }
+
     if (props.idPage) {
+      setLoading(true);
       const data = {
         idPage: props.idPage,
         content,
@@ -73,6 +101,8 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
         absolute inset-0  
         ${!props.open && 'hidden'}
     `}>
+          <ToastContainer />
+
           <div className={`
       bg-[#393939]
         flex items-center justify-start flex-col
@@ -219,6 +249,7 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
             rounded-lg
             transition-all
             `}>
+            <ToastContainer />
             <div onClick={props.close} className="w-full h-7 flex items-center justify-end">
               <XCircle className="text-2xl w-7 h-7 bg-red-500 rounded-lg mr-3 mt-3 cursor-pointer" />
             </div>
