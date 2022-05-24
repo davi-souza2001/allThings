@@ -22,7 +22,7 @@ export function Home() {
     const navigate = useNavigate();
 
     const { user } = UseAuth();
-    const { setModal } = UseModal();
+    const { setModal, changeData } = UseModal();
 
     const [openModal, setOpenModal] = useState(false);
     const [pages, setPages] = useState<Page[]>([]);
@@ -43,7 +43,7 @@ export function Home() {
             getPagesForUser()
         }
 
-    }, [user])
+    }, [user, changeData])
 
     return (
         <div className="h-full w-full">

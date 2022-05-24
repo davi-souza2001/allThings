@@ -28,7 +28,7 @@ interface Page {
 export function PageNotation() {
     const { pathname } = useLocation();
     const { user } = UseAuth();
-    const { setModal } = UseModal();
+    const { setModal, changeData } = UseModal();
     const idWithOutSlash = pathname.split('/')[1];
 
     const [openModal, setOpenModal] = useState(false);
@@ -60,7 +60,7 @@ export function PageNotation() {
             getNotesForUser()
             getPages()
         }
-    }, [user])
+    }, [user, changeData])
 
     return (
         <>

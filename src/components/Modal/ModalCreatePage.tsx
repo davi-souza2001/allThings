@@ -14,7 +14,7 @@ interface ModalCreatePageProps {
 }
 
 export function ModalCreatePage(props: ModalCreatePageProps) {
-  const { modal } = UseModal();
+  const { modal, changeData, setChangeData } = UseModal();
   const { user } = UseAuth();
 
   const [loading, setLoading] = useState(false);
@@ -38,6 +38,7 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
       await Client.post('/page/create', pageData).then((res) => {
         setNamePage("")
         props.close()
+        setChangeData(!changeData);
         setLoading(false);
       })
     }
@@ -57,6 +58,7 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
         setContent("")
         setTitleNote("")
         props.close()
+        setChangeData(!changeData);
         setLoading(false);
       })
     }
@@ -292,7 +294,7 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
               <button
                 onClick={createNote}
                 className={`
-                w-40 h-10 xl:h-14 xl:w-52
+                w-40 h-14 xl:h-14 xl:w-52
               bg-brand-500
                 rounded-lg
                 text-xl font-semibold
