@@ -2,11 +2,11 @@ import { Context, createContext, Dispatch, SetStateAction, useState } from "reac
 
 interface ModalContext {
     modal: string
-    setModal?: Dispatch<SetStateAction<"CreatePage" | "CreateNote">>
+    setModal: Dispatch<SetStateAction<"CreatePage" | "CreateNote">>
     children?: React.ReactNode
 }
 
-const ModalContext = createContext<ModalContext>({ modal: '' });
+const ModalContext = createContext<ModalContext>({ modal: '', setModal: () => {} });
 
 export function ModalProvider(props: any) {
     const [modal, setModal] = useState<'CreatePage' | 'CreateNote'>('CreatePage');

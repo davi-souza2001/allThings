@@ -28,9 +28,9 @@ interface Page {
 export function PageNotation() {
     const { pathname } = useLocation();
     const { user } = UseAuth();
-    const { modal } = UseModal();
+    const { setModal } = UseModal();
     const idWithOutSlash = pathname.split('/')[1];
-    
+
     const [openModal, setOpenModal] = useState(false);
     const [notes, setNotes] = useState<PageNotationProps[]>([]);
     const [pages, setPages] = useState<Page[]>([]);
@@ -55,6 +55,7 @@ export function PageNotation() {
     }
 
     useEffect(() => {
+        setModal('CreateNote')
         if (user?.id) {
             getNotesForUser()
             getPages()
