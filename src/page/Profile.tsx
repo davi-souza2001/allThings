@@ -22,7 +22,7 @@ export function Profile() {
                     <UserInfo name={user?.name} nickname={user?.email} description={user?.description} />
                 </div>
 
-                <div className="mt-8 ml-8">
+                {/* <div className="mt-8 ml-8">
                     <p>Últimas Tarefas criadas</p>
                     <div className="h-[500px]">
                         <Tab.Group>
@@ -33,7 +33,7 @@ export function Profile() {
                             </Tab.Panels>
                         </Tab.Group>
                     </div>
-                </div>
+                </div> */}
             </div>
         </>
     )
