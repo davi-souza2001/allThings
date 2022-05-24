@@ -91,6 +91,7 @@ export function PageNotation() {
             <ModalCreatePage
                 open={openModal}
                 close={() => setOpenModal(!openModal)}
+                idPage={idWithOutSlash}
             />
         </>
     )

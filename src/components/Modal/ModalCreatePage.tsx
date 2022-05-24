@@ -9,6 +9,7 @@ import Client from '../../data/client';
 interface ModalCreatePageProps {
   open: boolean;
   close: () => void;
+  idPage: string;
 }
 
 export function ModalCreatePage(props: ModalCreatePageProps) {
@@ -17,6 +18,10 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
 
   const [namePage, setNamePage] = useState("");
   const [levelPage, setLevelPage] = useState<"low" | "medium" | "high">("low");
+
+  const [content, setContent] = useState("");
+  const [titleNote, setTitleNote] = useState("");
+  const [typeNote, setTypeNote] = useState<"note" | "image">("note");
 
   async function createPage() {
     if (user?.id) {
@@ -32,6 +37,23 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
       })
     }
 
+  }
+
+  async function createNote() {
+    if (props.idPage) {
+      const data = {
+        idPage: props.idPage,
+        content,
+        title: titleNote,
+        type: typeNote
+      }
+
+      await Client.post('/note/create', data).then((res) => {
+        setContent("")
+        setTitleNote("")
+        props.close()
+      })
+    }
   }
 
   return (
@@ -181,7 +203,7 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
           bg-[#393939]
             flex items-center justify-start flex-col
             w-screen sm:w-2/4 md:w-3/6 lg:w-2/5
-            h-4/5 md:h-4/5 lg:h-5/6
+            h-4/5 lg:h-96
             rounded-lg
             transition-all
             `}>
@@ -196,10 +218,81 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
               <p className="font-semibold text-2xl">Criar nota</p>
             </div>
             <div className={`
-                bg-white
-                w-full
+                mt-5  
+                w-full h-8
+                flex items-center justify-center
             `}>
-              asdsf
+              <input type="text"
+                placeholder="Título da nota"
+                onChange={(e) => setTitleNote(e.target.value)}
+                className={` 
+                  md:w-80 lg:w-3/4 xl:h-12
+                  rounded-lg
+                  outline-none
+                  border-none
+                bg-[#4f4f4f]
+                  transition-all 
+                border-zinc-600 
+                focus:border-brand-500 focus:ring-brand-500 focus:ring-1 focus:outline-none
+                  `} />
+            </div>
+            <div className={`
+                mt-5  
+                w-full h-48
+                flex items-center justify-center
+            `}>
+              <textarea
+                placeholder="Conteúdo da nota"
+                onChange={(e) => setContent(e.target.value)}
+                className={`
+                resize-none
+              bg-[#4f4f4f]
+                h-3/4 w-3/4 sm:h-20 xl:h-full
+                border-none
+                outline-none
+                rounded-lg
+              `}
+              />
+            </div>
+            <div className={`
+                mt-5  
+                w-full h-16
+                flex items-center justify-center
+            `}>
+              <select
+                onChange={(e) => setTitleNote(e.target.value)}
+                className={`
+                mb-5
+                w-48 md:w-80
+                bg-[#4f4f4f]
+                border-none
+                outline-none
+                rounded-lg
+                focus:border-brand-500 focus:ring-brand-500 focus:ring-1 focus:outline-none
+              `}>
+                <option value="note">Nota</option>
+                <option value="image">Imagem</option>
+              </select>
+            </div>
+            <div className={`
+                mt-5 
+                w-full h-16
+                flex items-center justify-center
+            `}>
+              <button
+                onClick={createNote}
+                className={`
+                w-40 h-10 xl:h-14 xl:w-52
+              bg-brand-500
+                rounded-lg
+                text-xl font-semibold
+                cursor-pointer
+                lg:mb-10
+              hover:bg-brand-300
+                transition-all
+          `}>
+                Criar
+              </button>
             </div>
           </div>
         </div>
@@ -208,13 +301,3 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
   )
 }
 
-{/* <textarea 
-          className={`
-          resize-none
-          bg-[#4f4f4f]
-          h-3/4 w-3/4 sm:h-20 xl:h-full
-          border-none
-          outline-none
-          rounded-lg
-          `}
-          /> */}
