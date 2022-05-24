@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Tab } from '@headlessui/react';
 
 import { Header } from "../components/Header";
 import { SinglePage } from '../components/SinglePage';
 import { Widget } from "../components/Widget";
 import { ModalCreatePage } from '../components/Modal/ModalCreatePage';
+
 import UseAuth from '../services/hooks/useAuth';
 import Client from '../data/client';
-import { useNavigate } from 'react-router-dom';
-import UseModal from '../services/hooks/useModal';
 
 interface Page {
     id: string,
@@ -21,7 +21,6 @@ export function Home() {
     const navigate = useNavigate();
 
     const { user } = UseAuth();
-    const { modal } = UseModal();
 
     const [openModal, setOpenModal] = useState(false);
     const [pages, setPages] = useState<Page[]>([]);
@@ -36,7 +35,9 @@ export function Home() {
     }
 
     useEffect(() => {
-        getPagesForUser()
+        if (user?.id) {
+            getPagesForUser()
+        }
 
     }, [user])
 
