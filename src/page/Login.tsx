@@ -5,7 +5,7 @@ import Google from '../imgs/google.svg';
 import UseAuth from "../services/hooks/useAuth";
 
 export function Login() {
-    const { loginGoogle, checkLoginUser, user } = UseAuth()
+    const { loginGoogle } = UseAuth()
     const navigate = useNavigate()
 
     async function loginWithGoogle() {

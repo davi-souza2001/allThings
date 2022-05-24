@@ -96,13 +96,11 @@ export function AuthProvider(props: any) {
     }
 
     useEffect(() => {
-        setLoadingUser(true);
         if (token) {
             checkLoginUser()
         } else {
             navigate('/login', { replace: true })
         }
-        setLoadingUser(false);
     }, [token])
 
     return (

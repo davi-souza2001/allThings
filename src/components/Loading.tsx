@@ -1,3 +1,4 @@
+import { BookBookmark } from "phosphor-react"
 import { useState } from "react"
 import UseAuth from "../services/hooks/useAuth"
 
@@ -11,7 +12,12 @@ export function Loading(props: LoadingProps) {
     return (
         <div>
             {loadingUser ? (
-                <h1>Carregando</h1>
+                <div className="h-screen w-screen bg-[#1A1A1A] flex items-center justify-center">
+                    <div className="flex items-center text-xl px-6 cursor-pointer animate-bounce">
+                        <BookBookmark className="w-20 h-20 mr-2" />
+                        <p className="font-bold text-5xl">ALL THINGS</p>
+                    </div>
+                </div>
             ) : props.children}
         </div>
     )
