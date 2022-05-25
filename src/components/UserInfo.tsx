@@ -38,11 +38,10 @@ export function UserInfo(props: UserInfoProps) {
 
             </div>
             <div onClick={logout} className={`
-                  hidden
                 bg-red-500
                   mt-10 
                   w-20 h-10 
-                  md:flex items-center justify-center
+                  flex items-center justify-center
                   rounded-lg cursor-pointer
                   hover:bg-red-600 transition-colors
         `}>
