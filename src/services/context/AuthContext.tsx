@@ -35,10 +35,12 @@ const AuthContext = createContext<AuthContextProps>({
 
 const providerGoogle = new GoogleAuthProvider();
 
-function setCookieUser(user: any) {
-    Cookie.set('Admin-AllThings', user.email, {
-        expires: 7,
-    });
+function setCookieUser(user: User) {
+    if (user.id) {
+        Cookie.set('Admin-AllThings', user.id, {
+            expires: 7,
+        });
+    }
 }
 
 export function AuthProvider(props: any) {
@@ -77,7 +79,7 @@ export function AuthProvider(props: any) {
 
     async function checkLoginUser() {
         setLoadingUser(true);
-        const dataForRequest = { email: token }
+        const dataForRequest = { id: token }
         try {
             const data = await Client.post('/user/login', dataForRequest).then((req) => {
                 if (req.data) {
