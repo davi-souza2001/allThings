@@ -67,59 +67,43 @@ export function Home() {
 
     }, [user, changeData])
 
+    console.log(pages)
+
     return (
         <div className="h-full w-full">
             <Header />
             <ToastContainer />
-            <div className="w-full h-[80vh] flex items-center justify-start flex-col">
-                <Tab.Group>
-                    <Tab.List className="bg-[#101010] w-2/3 h-[10%] flex items-center justify-center mt-7 rounded-md">
-                        <Tab className="w-full h-full rounded-md outline-none text-zinc-500">Baixa</Tab>
-                        <Tab className="w-full h-full rounded-md outline-none text-zinc-500">Média</Tab>
-                        <Tab className="w-full h-full rounded-md outline-none text-zinc-500">Alta</Tab>
-                    </Tab.List>
-                    <Tab.Panels className="bg-[#2D2D2D] rounded-md h-full w-[300px] mt-10 overflow-y-scroll scrollbar-thumb-zinc-700 scrollbar-track-transparent scrollbar-thin md:w-2/4 md:h-5/6">
-                        <Tab.Panel>
-                            {pages?.map((page: Page) => {
-                                if (page.levelType === 'low') {
-                                    return (
-                                        <SinglePage
-                                            namePage={page.name}
-                                            open={() => navigate(`/${page.id}`)}
-                                            delete={() => deletePage(page.id)}
-                                            key={page.id} />
-                                    )
-                                }
-                            })}
-                        </Tab.Panel>
-                        <Tab.Panel>
-                            {pages?.map((page: Page) => {
-                                if (page.levelType === 'medium') {
-                                    return (
-                                        <SinglePage
-                                            namePage={page.name}
-                                            open={() => navigate(`/${page.id}`)}
-                                            delete={() => deletePage(page.id)}
-                                            key={page.id} />
-                                    )
-                                }
-                            })}
-                        </Tab.Panel>
-                        <Tab.Panel>
-                            {pages?.map((page: Page) => {
-                                if (page.levelType === 'high') {
-                                    return (
-                                        <SinglePage
-                                            namePage={page.name}
-                                            open={() => navigate(`/${page.id}`)}
-                                            delete={() => deletePage(page.id)}
-                                            key={page.id} />
-                                    )
-                                }
-                            })}
-                        </Tab.Panel>
-                    </Tab.Panels>
-                </Tab.Group>
+            <div className='h-20 w-full font-semibold text-3xl flex items-center'>
+                <p className='ml-3'>Páginas</p>
+            </div>
+            <div className='h-20 w-full flex items-center justify-around'>
+                <div className='bg-[#2c2c2c] h-10 w-44 flex items-center justify-center rounded-md'>
+                    <p className='text-[#5e5c5c] font-medium'>Em processo</p>
+                </div>
+                <div className='bg-[#2c2c2c] h-10 w-44 flex items-center justify-center rounded-md'>
+                    <p className='text-[#5e5c5c] font-medium'>Finalizadas</p>
+                </div>
+            </div>
+            <div className='h-[55vh] w-full flex items-center justify-start flex-col overflow-scroll overflow-x-hidden scrollbar-thumb-zinc-700 scrollbar-track-transparent scrollbar-thin'>
+                {pages?.map((page: Page) => {
+                    return (
+                        <div className='h-20 w-96 flex my-3' key={page.id}>
+                            <div className='w-5 h-full rounded-l-md bg-red-600' />
+                            <div
+                                onClick={() => navigate(`/${page.id}`)}
+                                className='bg-[#262626] h-full w-full flex items-center justify-around rounded-r-md cursor-pointer'
+                            >
+                                <div className='h-full w-full flex items-start justify-center flex-col'>
+                                    <p className='mt-2 ml-3'>{page.name}</p>
+                                    <p className='ml-3'>24/10/2001</p>
+                                </div>
+                                <div className='h-full w-20 flex items-center justify-center'>
+                                    <p>k</p>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                })}
             </div>
             <Widget onClick={() => setOpenModal(!openModal)} />
             <ModalCreatePage
