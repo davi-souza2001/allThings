@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-  @apply bg-[#1A1A1A] text-zinc-100 font-poppins
+body {
+	@apply bg-[#1A1A1A] text-zinc-100 font-poppins
 }
