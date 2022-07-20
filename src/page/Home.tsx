@@ -45,6 +45,8 @@ export function Home() {
 
 	}, [user, changeData])
 
+	console.log(pages)
+
 	return (
 		<div className="h-full w-full">
 			<Header />
@@ -53,18 +55,18 @@ export function Home() {
 				<p className='ml-3'>Páginas</p>
 			</div>
 			<div className='h-20 w-full flex items-center justify-around'>
-				<div className='bg-[#2c2c2c] h-10 w-44 flex items-center justify-center rounded-md'>
+				<div className='bg-[#2c2c2c] h-10 w-44 md:w-52 lg:w-64 flex items-center justify-center rounded-md cursor-pointer'>
 					<p className='text-[#5e5c5c] font-medium'>Em processo</p>
 				</div>
-				<div className='bg-[#2c2c2c] h-10 w-44 flex items-center justify-center rounded-md'>
+				<div className='bg-[#2c2c2c] h-10 w-44 md:w-52 lg:w-64 flex items-center justify-center rounded-md cursor-pointer'>
 					<p className='text-[#5e5c5c] font-medium'>Finalizadas</p>
 				</div>
 			</div>
 			<div className='h-[55vh] w-full flex items-center justify-start flex-col overflow-scroll overflow-x-hidden scrollbar-thumb-zinc-700 scrollbar-track-transparent scrollbar-thin'>
 				{pages?.map((page: Page) => {
 					return (
-						<div className='h-20 w-96 flex my-1' key={page.id}>
-							<div className='w-5 h-full rounded-l-md bg-red-500' />
+						<div className='h-20 w-96 flex my-1 md:w-[500px] lg:w-[700px]' key={page.id}>
+							<div className={`w-5 h-full rounded-l-md ${page.levelType === 'low' && 'bg-green-400'} ${page.levelType === 'medium' && 'bg-yellow-300'} ${page.levelType === 'high' && 'bg-red-500'}`} />
 							<div
 								onClick={() => navigate(`/${page.id}`)}
 								className='bg-[#262626] h-full w-full flex items-center justify-around rounded-r-md cursor-pointer'
@@ -74,7 +76,7 @@ export function Home() {
 									<p className='ml-3'>24/10/2001</p>
 								</div>
 								<div className='h-full w-20 flex items-center justify-center'>
-									<Timer className='text-2xl text-red-400' />
+									<Timer className={`text-2xl ${page.levelType === 'low' && 'text-green-400'} ${page.levelType === 'medium' && 'text-yellow-300'} ${page.levelType === 'high' && 'text-red-400'}`} />
 								</div>
 							</div>
 						</div>
