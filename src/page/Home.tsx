@@ -26,6 +26,8 @@ export function Home() {
 
 	const [openModal, setOpenModal] = useState(false)
 	const [pages, setPages] = useState<Page[]>([])
+	const [progress, setProgress] = useState<boolean>(true)
+	const [finished, setSinished] = useState<boolean>(false)
 
 	async function getPagesForUser() {
 		if (user) {
@@ -55,8 +57,8 @@ export function Home() {
 				<p className='ml-3'>Páginas</p>
 			</div>
 			<div className='h-20 w-full flex items-center justify-around'>
-				<div className='bg-[#2c2c2c] h-10 w-44 md:w-52 lg:w-64 flex items-center justify-center rounded-md cursor-pointer'>
-					<p className='text-[#5e5c5c] font-medium'>Em processo</p>
+				<div className={`bg-[#2c2c2c] h-10 w-44 md:w-52 lg:w-64 flex items-center justify-center rounded-md cursor-pointer ${progress && 'border-[1px] border-brand-500'}`}>
+					<p className={`text-[#5e5c5c] font-medium ${progress && 'text-brand-500 font-light'}`}>Em processo</p>
 				</div>
 				<div className='bg-[#2c2c2c] h-10 w-44 md:w-52 lg:w-64 flex items-center justify-center rounded-md cursor-pointer'>
 					<p className='text-[#5e5c5c] font-medium'>Finalizadas</p>
@@ -72,8 +74,8 @@ export function Home() {
 								className='bg-[#262626] h-full w-full flex items-center justify-around rounded-r-md cursor-pointer'
 							>
 								<div className='h-full w-full flex items-start justify-center flex-col'>
-									<p className='mt-2 ml-3'>{page.name}</p>
-									<p className='ml-3'>24/10/2001</p>
+									<p className='mt-2 ml-3 text-[#dcdcdc]'>{page.name}</p>
+									<p className='ml-3 text-[#5d5d5d]'>24/10/2001</p>
 								</div>
 								<div className='h-full w-20 flex items-center justify-center'>
 									<Timer className={`text-2xl ${page.levelType === 'low' && 'text-green-400'} ${page.levelType === 'medium' && 'text-yellow-300'} ${page.levelType === 'high' && 'text-red-400'}`} />
