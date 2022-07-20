@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BiTime } from "react-icons/bi";
 import { toast, ToastContainer } from 'react-toastify';
+import { Timer } from 'phosphor-react';
 
 import { Header } from "../components/Header";
 import { Widget } from "../components/Widget";
@@ -95,7 +95,7 @@ export function Home() {
                                     <p className='ml-3'>24/10/2001</p>
                                 </div>
                                 <div className='h-full w-20 flex items-center justify-center'>
-                                    <BiTime className='text-2xl text-red-400' />
+                                    <Timer className='text-2xl text-red-400' />
                                 </div>
                             </div>
                         </div>
