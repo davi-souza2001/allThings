@@ -19,22 +19,10 @@ interface Page {
 }
 
 export function Home() {
-    function notify(msg: string) {
-        toast.error(msg, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-        })
-    }
-
     const navigate = useNavigate();
 
     const { user } = UseAuth();
-    const { setModal, changeData, setChangeData } = UseModal();
+    const { setModal, changeData } = UseModal();
 
     const [openModal, setOpenModal] = useState(false);
     const [pages, setPages] = useState<Page[]>([]);
@@ -45,15 +33,6 @@ export function Home() {
             await Client.post('/page/get', data).then((res) => {
                 setPages(res.data)
             })
-        }
-    }
-
-    async function deletePage(pageId: string) {
-        if (user) {
-            const data = { id: pageId };
-            await Client.post('/page/delete', data).then((res) => {
-                setChangeData(!changeData)
-            }).catch((error) => notify('Você tem notas não terminadas nessa página!'))
         }
     }
 

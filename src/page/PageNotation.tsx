@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom'
-import { NotePencil, Trash, Wrench } from 'phosphor-react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { toast, ToastContainer } from 'react-toastify';
+import { Trash, Wrench } from 'phosphor-react'
 import { Menu, MenuButton, MenuList } from '@chakra-ui/react';
 
 import { Header } from '../components/Header'
@@ -30,6 +31,7 @@ export function PageNotation() {
     const { pathname } = useLocation();
     const { user } = UseAuth();
     const { setModal, changeData, setChangeData } = UseModal();
+    const navigate = useNavigate();
     const idWithOutSlash = pathname.split('/')[1];
 
     const [openModal, setOpenModal] = useState(false);
@@ -54,12 +56,33 @@ export function PageNotation() {
         }
     }
 
-    async function deleNote(idNote: string){
-        if(user){
-            const data = {id: idNote}
+    async function deleNote(idNote: string) {
+        if (user) {
+            const data = { id: idNote }
             await Client.post('/note/delete', data).then((res) => {
                 setChangeData(!changeData)
             })
+        }
+    }
+
+    function notify(msg: string) {
+        toast.error(msg, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        })
+    }
+
+    async function deletePage(pageId: string) {
+        if (user) {
+            const data = { id: pageId };
+            await Client.post('/page/delete', data).then((res) => {
+                navigate('/')
+            }).catch(() => notify('Você tem notas não terminadas nessa página!'))
         }
     }
 
@@ -74,6 +97,7 @@ export function PageNotation() {
     return (
         <>
             <Header />
+            <ToastContainer />
             <div className="w-3/4 h-20 flex items-center ml-10">
                 <span className="font-semibold text-4xl flex">
                     {pages?.map((page: Page) => {
@@ -81,7 +105,7 @@ export function PageNotation() {
                             return page.name
                         }
                     })}
-                    <NotePencil className="ml-5 cursor-pointer" />
+                    <Trash className="ml-5 cursor-pointer" onClick={() => deletePage(idWithOutSlash)} />
                 </span>
             </div>
             <div className="w-full h-full flex items-center justify-center flex-col">
