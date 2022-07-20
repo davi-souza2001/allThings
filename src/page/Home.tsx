@@ -1,16 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Tab } from '@headlessui/react';
+import { BiTime } from "react-icons/bi";
+import { toast, ToastContainer } from 'react-toastify';
 
 import { Header } from "../components/Header";
-import { SinglePage } from '../components/SinglePage';
 import { Widget } from "../components/Widget";
 import { ModalCreatePage } from '../components/Modal/ModalCreatePage';
 
 import UseAuth from '../services/hooks/useAuth';
 import Client from '../data/client';
 import UseModal from '../services/hooks/useModal';
-import { toast, ToastContainer } from 'react-toastify';
 
 interface Page {
     id: string,
@@ -67,8 +66,6 @@ export function Home() {
 
     }, [user, changeData])
 
-    console.log(pages)
-
     return (
         <div className="h-full w-full">
             <Header />
@@ -87,8 +84,8 @@ export function Home() {
             <div className='h-[55vh] w-full flex items-center justify-start flex-col overflow-scroll overflow-x-hidden scrollbar-thumb-zinc-700 scrollbar-track-transparent scrollbar-thin'>
                 {pages?.map((page: Page) => {
                     return (
-                        <div className='h-20 w-96 flex my-3' key={page.id}>
-                            <div className='w-5 h-full rounded-l-md bg-red-600' />
+                        <div className='h-20 w-96 flex my-1' key={page.id}>
+                            <div className='w-5 h-full rounded-l-md bg-red-500' />
                             <div
                                 onClick={() => navigate(`/${page.id}`)}
                                 className='bg-[#262626] h-full w-full flex items-center justify-around rounded-r-md cursor-pointer'
@@ -98,7 +95,7 @@ export function Home() {
                                     <p className='ml-3'>24/10/2001</p>
                                 </div>
                                 <div className='h-full w-20 flex items-center justify-center'>
-                                    <p>k</p>
+                                    <BiTime className='text-2xl text-red-400' />
                                 </div>
                             </div>
                         </div>
