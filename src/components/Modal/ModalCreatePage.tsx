@@ -1,11 +1,11 @@
 import { useState } from "react"
-import { XCircle } from "phosphor-react"
+import { XCircle, Pen } from "phosphor-react"
 import { CircularProgress } from '@chakra-ui/react'
+import { toast, ToastContainer } from "react-toastify"
 
 import UseModal from "../../services/hooks/useModal"
 import UseAuth from '../../services/hooks/useAuth'
 import Client from '../../data/client'
-import { toast, ToastContainer } from "react-toastify"
 
 
 interface ModalCreatePageProps {
@@ -111,13 +111,28 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
 			{modal === 'CreatePage' && (
 				<div className={`bg-[rgba(0,0,0,.5)] w-screen h-screen flex items-center justify-center absolute inset-0 ${!props.open && 'hidden'}`}>
 					<ToastContainer />
-					<div className='bg-[#242424] flex items-center justify-start flex-col w-screen sm:w-2/4 md:w-3/6 lg:w-2/5 h-4/5 md:h-4/5 lg:h-5/6 rounded-lg transition-all '>
+					<div className='bg-[#242424] flex items-center justify-start flex-col w-80 sm:w-2/4 md:w-3/6 lg:w-2/5 h-2/5 md:h-2/5 lg:h-3/6 rounded-lg transition-all '>
 						<div onClick={props.close} className="w-full h-7 flex items-center justify-end">
-							<XCircle className="text-2xl w-7 h-7 bg-red-500 rounded-lg mr-3 mt-3 cursor-pointer" />
+							<XCircle className="text-2xl w-7 h-7 bg-red-500 rounded-md mr-3 mt-3 cursor-pointer" />
 						</div>
 						<div className='w-full h-10 md:h-14 flex items-center justify-center'>
 							<span className='font-semibold text-2xl xl:text-3xl'>Página</span>
 						</div>
+						<form>
+							<div className='h-8 w-72 flex items-center justify-around mt-2 bg-[#2b2b2b] rounded-md'>
+								<Pen className='text-xl' />
+								<input
+									className='h-8 w-56 bg-[#2f2f2f] border-0 outline-none rounded-md'
+									type="text"
+								/>
+							</div>
+							<div className='h-10 w-72 flex items-center justify-around mt-4 bg-[#2b2b2b] rounded-md'>
+								<Pen className='text-xl' />
+								<select className='h-10 w-56 bg-[#2f2f2f] border-0 outline-none rounded-md'>
+									<option>123</option>
+								</select>
+							</div>
+						</form>
 					</div>
 				</div >
 			)}
