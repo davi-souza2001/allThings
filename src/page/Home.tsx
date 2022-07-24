@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify'
 import { Timer } from 'phosphor-react'
 
-import { Header } from "../components/Header"
-import { Widget } from "../components/Widget"
+import { Header } from '../components/Header'
+import { Widget } from '../components/Widget'
 import { ModalCreatePage } from '../components/Modal/ModalCreatePage'
 
 import UseAuth from '../services/hooks/useAuth'
@@ -48,7 +48,7 @@ export function Home() {
 	}, [user, changeData])
 
 	return (
-		<div className="h-full w-full">
+		<div className='h-full w-full'>
 			<Header />
 			<ToastContainer />
 			<div className='h-20 w-full font-semibold text-3xl flex items-center'>

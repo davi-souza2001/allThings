@@ -1,8 +1,8 @@
-import { createContext, Dispatch, SetStateAction, useState } from "react"
+import { createContext, Dispatch, SetStateAction, useState } from 'react'
 
 interface ModalContext {
 	modal: string
-	setModal: Dispatch<SetStateAction<"CreatePage" | "CreateNote">>
+	setModal: Dispatch<SetStateAction<'CreatePage' | 'CreateNote'>>
 	changeData: boolean
 	setChangeData: Dispatch<SetStateAction<boolean>>
 	children?: React.ReactNode

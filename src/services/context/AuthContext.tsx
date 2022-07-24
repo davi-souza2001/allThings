@@ -1,9 +1,9 @@
-import { useNavigate } from "react-router-dom"
-import { createContext, Dispatch, SetStateAction, useEffect, useState } from "react"
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
+import { useNavigate } from 'react-router-dom'
+import { createContext, Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import Cookie from 'js-cookie'
 
-import { auth } from "../../firebase/connect"
+import { auth } from '../../firebase/connect'
 import Client from '../../data/client'
 
 interface AuthContextProps {

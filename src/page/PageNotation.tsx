@@ -67,7 +67,7 @@ export function PageNotation() {
 
 	function notify(msg: string) {
 		toast.error(msg, {
-			position: "top-right",
+			position: 'top-right',
 			autoClose: 5000,
 			hideProgressBar: false,
 			closeOnClick: true,
@@ -98,25 +98,25 @@ export function PageNotation() {
 		<>
 			<Header />
 			<ToastContainer />
-			<div className="w-3/4 h-20 flex items-center ml-10">
-				<span className="font-semibold text-4xl flex">
+			<div className='w-3/4 h-20 flex items-center ml-10'>
+				<span className='font-semibold text-4xl flex'>
 					{pages?.map((page: Page) => {
 						if (page.id === idWithOutSlash) {
 							return page.name
 						}
 					})}
-					<Trash className="ml-5 cursor-pointer" onClick={() => deletePage(idWithOutSlash)} />
+					<Trash className='ml-5 cursor-pointer' onClick={() => deletePage(idWithOutSlash)} />
 				</span>
 			</div>
-			<div className="w-full h-full flex items-center justify-center flex-col">
-				<div className="w-3/4 max-h-[70vh] mb-5 overflow-scroll overflow-x-hidden scrollbar-thumb-zinc-700 scrollbar-track-transparent scrollbar-thin">
+			<div className='w-full h-full flex items-center justify-center flex-col'>
+				<div className='w-3/4 max-h-[70vh] mb-5 overflow-scroll overflow-x-hidden scrollbar-thumb-zinc-700 scrollbar-track-transparent scrollbar-thin'>
 					{notes?.map((note: PageNotationProps) => {
 						return (
-							<div key={note.id} className="mt-5 p-5 rounded-lg bg-neutral-800 mb-4">
-								<div className="w-full flex items-center justify-between">
-									<p className="text-2xl font-medium mb-4">{note.title}</p>
+							<div key={note.id} className='mt-5 p-5 rounded-lg bg-neutral-800 mb-4'>
+								<div className='w-full flex items-center justify-between'>
+									<p className='text-2xl font-medium mb-4'>{note.title}</p>
 									<Menu>
-										<MenuButton className="p-3 mr-4 text-xl bg-brand-500 rounded-md text-white hover:bg-brand-300 transition-colors">
+										<MenuButton className='p-3 mr-4 text-xl bg-brand-500 rounded-md text-white hover:bg-brand-300 transition-colors'>
 											<Wrench />
 										</MenuButton>
 										<MenuList className='mt-2 w-28 h-10 flex items-center justify-around flex-col'>
