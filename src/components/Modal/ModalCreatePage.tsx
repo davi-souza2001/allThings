@@ -114,7 +114,7 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
 			{modal === 'CreatePage' && (
 				<div className={`bg-[rgba(0,0,0,.5)] w-screen h-screen flex items-center justify-center absolute inset-0 ${!props.open && 'hidden'}`}>
 					<ToastContainer />
-					<div className='bg-[#242424] flex items-center justify-start flex-col w-80 sm:w-2/4 md:w-3/6 lg:w-2/5 h-2/5 md:h-2/5 lg:h-3/6 rounded-lg transition-all '>
+					<div className='bg-[#242424] flex items-center justify-start flex-col w-80 sm:w-2/4 md:w-3/6 lg:w-2/5 h-2/5 md:h-2/5 lg:h-3/6 rounded-lg transition-all xl:w-1/4'>
 						<div onClick={props.close} className="w-full h-7 flex items-center justify-end">
 							<XCircle className="text-2xl w-7 h-7 bg-red-500 rounded-md mr-3 mt-3 cursor-pointer" />
 						</div>
@@ -122,24 +122,24 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
 							<span className='font-semibold text-2xl xl:text-3xl'>Página</span>
 						</div>
 						<form onSubmit={(e) => createPage(e)}>
-							<div className='h-8 w-72 flex items-center justify-around mt-2 bg-[#2b2b2b] rounded-md'>
+							<div className='h-8 w-72 flex items-center justify-around mt-2 bg-[#2b2b2b] rounded-md lg:w-96 lg:h-24 xl:h-16'>
 								<Pen className='text-xl' />
 								<input
-									className='h-8 w-56 bg-[#2f2f2f] border-0 outline-none rounded-md'
+									className='h-8 w-56 bg-[#2f2f2f] border-0 outline-none rounded-md lg:w-80 lg:h-16 xl:h-12'
 									placeholder="Add title"
 									type="text"
 									onChange={(e) => setNamePage(e.target.value)}
 								/>
 							</div>
-							<div className='h-10 w-72 flex items-center justify-around mt-4 bg-[#2b2b2b] rounded-md'>
+							<div className='h-10 w-72 flex items-center justify-around mt-4 bg-[#2b2b2b] rounded-md lg:w-96 lg:h-24 xl:h-16'>
 								<Bag className='text-xl' />
-								<select onChange={(e) => setLevelPage(e.target.value)} className='h-10 w-56 bg-[#2f2f2f] border-0 outline-none rounded-md'>
+								<select onChange={(e) => setLevelPage(e.target.value)} className='h-10 w-56 bg-[#2f2f2f] border-0 outline-none rounded-md lg:w-80 lg:h-16 xl:h-12'>
 									<option value='low'>low</option>
 									<option value='medium'>medium</option>
 									<option value='high'>high</option>
 								</select>
 							</div>
-							<div className='h-10 w-72 flex items-center justify-around mt-10 bg-brand-500 rounded-md'>
+							<div className='h-10 w-72 flex items-center justify-around mt-10 bg-brand-500 cursor-pointer hover:bg-brand-300 transition-all rounded-md lg:w-full lg:h-12 xl:mt-32'>
 								<button
 									type="submit"
 									className="text-xl font-semibold"
