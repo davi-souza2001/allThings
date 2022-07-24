@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { XCircle, Pen } from "phosphor-react"
+import { XCircle, Pen, Bag } from "phosphor-react"
 import { CircularProgress } from '@chakra-ui/react'
 import { toast, ToastContainer } from "react-toastify"
 
@@ -21,7 +21,7 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
 	const [loading, setLoading] = useState(false)
 
 	const [namePage, setNamePage] = useState("")
-	const [levelPage, setLevelPage] = useState<"low" | "medium" | "high">("low")
+	const [levelPage, setLevelPage] = useState("low")
 
 	const [content, setContent] = useState("")
 	const [titleNote, setTitleNote] = useState("")
@@ -51,7 +51,8 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
 		})
 	}
 
-	async function createPage() {
+	async function createPage(e: React.FormEvent<HTMLFormElement>) {
+		e.preventDefault()
 		if (namePage === '') {
 			notifyError('Preencha o nome da página!')
 			return
@@ -75,7 +76,9 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
 		}
 	}
 
-	async function createNote() {
+	async function createNote(e: React.FormEvent<HTMLFormElement>) {
+		e.preventDefault()
+
 		if (titleNote === '') {
 			notifyError('Preencha o título da nota!')
 			return
@@ -86,24 +89,24 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
 			return
 		}
 
-		if (props.idPage) {
-			setLoading(true)
-			const data = {
-				idPage: props.idPage,
-				content,
-				title: titleNote,
-				type: typeNote
-			}
+		// if (props.idPage) {
+		// 	setLoading(true)
+		// 	const data = {
+		// 		idPage: props.idPage,
+		// 		content,
+		// 		title: titleNote,
+		// 		type: typeNote
+		// 	}
 
-			await Client.post('/note/create', data).then((res) => {
-				setContent("")
-				setTitleNote("")
-				props.close()
-				setChangeData(!changeData)
-				setLoading(false)
-				notifySucess('Nota criada com sucesso!')
-			})
-		}
+		// 	await Client.post('/note/create', data).then((res) => {
+		// 		setContent("")
+		// 		setTitleNote("")
+		// 		props.close()
+		// 		setChangeData(!changeData)
+		// 		setLoading(false)
+		// 		notifySucess('Nota criada com sucesso!')
+		// 	})
+		// }
 	}
 
 	return (
@@ -118,19 +121,31 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
 						<div className='w-full h-10 md:h-14 flex items-center justify-center'>
 							<span className='font-semibold text-2xl xl:text-3xl'>Página</span>
 						</div>
-						<form>
+						<form onSubmit={(e) => createPage(e)}>
 							<div className='h-8 w-72 flex items-center justify-around mt-2 bg-[#2b2b2b] rounded-md'>
 								<Pen className='text-xl' />
 								<input
 									className='h-8 w-56 bg-[#2f2f2f] border-0 outline-none rounded-md'
+									placeholder="Add title"
 									type="text"
+									onChange={(e) => setNamePage(e.target.value)}
 								/>
 							</div>
 							<div className='h-10 w-72 flex items-center justify-around mt-4 bg-[#2b2b2b] rounded-md'>
-								<Pen className='text-xl' />
-								<select className='h-10 w-56 bg-[#2f2f2f] border-0 outline-none rounded-md'>
-									<option>123</option>
+								<Bag className='text-xl' />
+								<select onChange={(e) => setLevelPage(e.target.value)} className='h-10 w-56 bg-[#2f2f2f] border-0 outline-none rounded-md'>
+									<option value='low'>low</option>
+									<option value='medium'>medium</option>
+									<option value='high'>high</option>
 								</select>
+							</div>
+							<div className='h-10 w-72 flex items-center justify-around mt-10 bg-brand-500 rounded-md'>
+								<button
+									type="submit"
+									className="text-xl font-semibold"
+								>
+									Submit
+								</button>
 							</div>
 						</form>
 					</div>
@@ -210,7 +225,6 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
                 flex items-center justify-center
             `}>
 							<button
-								onClick={createNote}
 								className={`
                 w-40 h-14 xl:h-14 xl:w-52
               bg-brand-500

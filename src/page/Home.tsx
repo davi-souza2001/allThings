@@ -47,8 +47,6 @@ export function Home() {
 
 	}, [user, changeData])
 
-	console.log(pages)
-
 	return (
 		<div className="h-full w-full">
 			<Header />
