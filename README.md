@@ -25,5 +25,3 @@ The database used was postgreSQL!
     <img alt="NODE" width="105" src="https://img.shields.io/badge/node-000?style=for-the-badge&logo=node.js&logoColor=white"/>
     <img alt="FIREBASE" width="135" src="https://img.shields.io/badge/prisma-FFCA28?style=for-the-badge&logo=prisma&logoColor=black"/>
  </div>
-
-<!-- c -->
