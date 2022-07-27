@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify'
-import { Trash, Wrench } from 'phosphor-react'
-import { Menu, MenuButton, MenuList } from '@chakra-ui/react'
+import { Trash, Wrench, Pencil } from 'phosphor-react'
+import { Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
 
 import { Header } from '../components/Header'
 import { Widget } from '../components/Widget'
@@ -105,7 +105,19 @@ export function PageNotation() {
 							return page.name
 						}
 					})}
-					<Trash className='ml-5 cursor-pointer' onClick={() => deletePage(idWithOutSlash)} />
+					<Menu>
+						<MenuButton className='ml-10'>
+							<Pencil/>
+						</MenuButton>
+						<MenuList className='bg-[#833e3e] p-6 rounded-md'>
+							<MenuItem>
+								<Trash className='cursor-pointer mb-10' onClick={() => deletePage(idWithOutSlash)} />
+							</MenuItem>
+							<MenuItem>
+								<Trash className='cursor-pointer' onClick={() => deletePage(idWithOutSlash)} />
+							</MenuItem>
+						</MenuList>
+					</Menu>
 				</span>
 			</div>
 			<div className='w-full h-full flex items-center justify-center flex-col'>
