@@ -63,7 +63,8 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
 			const pageData = {
 				name: namePage,
 				levelType: levelPage,
-				idUser: user?.id
+				idUser: user?.id,
+				phase: 'processing'
 			}
 
 			await Client.post('/page/create', pageData).then((res) => {
