@@ -1,6 +1,6 @@
 import Idea from '../imgs/idea.png'
 
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 interface WidgetFormProps {
@@ -8,16 +8,6 @@ interface WidgetFormProps {
 }
 
 export function WidgetForm(props: WidgetFormProps) {
-
-	const notify = () => toast.dark('🦄 Wow so easy!', {
-		position: 'top-right',
-		autoClose: 5000,
-		hideProgressBar: false,
-		closeOnClick: true,
-		pauseOnHover: true,
-		draggable: true,
-		progress: undefined,
-	})
 
 	return (
 		<div className='bg-zinc-800 p-4 relative rounded-2xl mb-4 flex flex-col item-center shadow-lg w-[calc(100vw-2rem)] md:w-auto'>

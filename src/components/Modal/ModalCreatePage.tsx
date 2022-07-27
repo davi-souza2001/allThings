@@ -122,7 +122,7 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
 			{modal === 'CreatePage' && (
 				<div className={`bg-[rgba(0,0,0,.5)] w-screen h-screen flex items-center justify-center absolute inset-0 ${!props.open && 'hidden'}`}>
 					<ToastContainer />
-					<div className='bg-[#242424] flex items-center justify-start flex-col w-80 h-2/5 sm:w-2/4 md:w-3/6 lg:w-2/5 md:h-2/5 lg:h-3/6 rounded-lg transition-all xl:w-1/4'>
+					<div className='bg-[#242424] flex items-center justify-start flex-col w-80 h-2/5 sm:w-2/4 md:w-3/6 md:h-2/5 lg:w-2/5 lg:h-4/6 rounded-lg transition-all xl:w-1/3'>
 						<div onClick={props.close} className='w-full h-7 flex items-center justify-end'>
 							<XCircle className='text-2xl w-7 h-7 bg-red-500 rounded-md mr-3 mt-3 cursor-pointer' />
 						</div>
@@ -162,7 +162,7 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
 
 			{modal === 'CreateNote' && (
 				<div className={`bg-[rgba(0,0,0,.5)] w-screen h-screen flex items-center justify-center absolute inset-0 ${!props.open && 'hidden'}`}>
-					<div className='bg-[#1b1b1b] w-80 h-4/6 flex items-center justify-start flex-col sm:w-2/4 md:w-3/6 lg:w-2/5  rounded-lg transition-all'>
+					<div className='bg-[#1b1b1b] w-80 h-4/6 flex items-center justify-start flex-col sm:w-2/4 md:w-3/6 lg:w-2/5 lg:h-[500px] rounded-lg transition-all'>
 						<ToastContainer />
 						<div onClick={props.close} className='w-full h-7 flex items-center justify-end'>
 							<XCircle className='text-2xl w-7 h-7 bg-red-500 rounded-lg mr-3 mt-3 cursor-pointer' />
@@ -198,7 +198,7 @@ export function ModalCreatePage(props: ModalCreatePageProps) {
 							<div className='mt-5 w-full h-16 flex items-center justify-center'>
 								<button
 									disabled={loading && true}
-									className='w-40 h-14 xl:h-14 xl:w-52 bg-brand-500 rounded-lg text-xl font-semibold cursor-pointer lg:mb-10 hover:bg-brand-300 transition-all lg:mt-20 xl:mt-[20vh]'>
+									className='w-40 h-14 xl:h-14 xl:w-52 bg-brand-500 rounded-lg text-xl font-semibold cursor-pointer lg:mb-20 hover:bg-brand-300 transition-all lg:mt-20 '>
 									{loading ? (
 										<CircularProgress isIndeterminate color='rgb(130 87 230)' />
 									)
