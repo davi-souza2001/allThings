@@ -89,12 +89,9 @@ export function PageNotation() {
 	async function changePhase() {
 		pages.map(async (page: Page) => {
 			if (page.id === idWithOutSlash) {
-				if (user) {
-					const data =  page
-					await Client.patch('/page/changePhase', data).then((res) => {
-						navigate('/')
-					})
-				}
+				await Client.patch('/page/changePhase', page).then((res) => {
+					navigate('/')
+				})
 			}
 		})
 	}
