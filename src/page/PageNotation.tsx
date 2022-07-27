@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify'
-import { Trash, Wrench, Pencil } from 'phosphor-react'
+import { Trash, Wrench, Pencil, CheckCircle } from 'phosphor-react'
 import { Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
 
 import { Header } from '../components/Header'
@@ -86,6 +86,19 @@ export function PageNotation() {
 		}
 	}
 
+	async function changePhase() {
+		pages.map(async (page: Page) => {
+			if (page.id === idWithOutSlash) {
+				if (user) {
+					const data =  page
+					await Client.patch('/page/changePhase', data).then((res) => {
+						navigate('/')
+					})
+				}
+			}
+		})
+	}
+
 	useEffect(() => {
 		setModal('CreateNote')
 		if (user?.id) {
@@ -107,11 +120,11 @@ export function PageNotation() {
 					})}
 					<Menu>
 						<MenuButton className='ml-10'>
-							<Pencil/>
+							<Pencil />
 						</MenuButton>
-						<MenuList className='bg-[#833e3e] p-6 rounded-md'>
+						<MenuList className='bg-[#242424] p-6 rounded-md'>
 							<MenuItem>
-								<Trash className='cursor-pointer mb-10' onClick={() => deletePage(idWithOutSlash)} />
+								<CheckCircle className='cursor-pointer mb-10' onClick={() => changePhase()} />
 							</MenuItem>
 							<MenuItem>
 								<Trash className='cursor-pointer' onClick={() => deletePage(idWithOutSlash)} />
